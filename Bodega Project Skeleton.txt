@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­  META / TITLE ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­ -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Newark Farm-Bodega-School Hub</title>
+
+  <!-- ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­  STYLES ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­ -->
+  <!-- Tailwind CDN for quick utility classes; remove if you prefer custom CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Leaflet map framework -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha512-.../=="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha512-.../=="
+    crossorigin=""
+  ></script>
+
+  <!-- Simple heat-layer plugin -->
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+  <!-- PapaParse for quick CSV → JSON parsing -->
+  <script src="https://unpkg.com/papaparse@5.4.3/papaparse.min.js"></script>
+
+  <!-- Tabulator for sortable / filterable tables -->
+  <link
+    href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"></script>
+
+  <style>
+    /* Map must have an explicit height */
+    #map {
+      height: 60vh;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-100 font-sans leading-relaxed">
+  <!-- ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­  HEADER ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­ -->
+  <header class="bg-emerald-800 text-white py-4 mb-6">
+    <h1 class="text-center text-2xl font-semibold">
+      Newark Local Supply-Chain Dashboard
+    </h1>
+  </header>
+
+  <!-- ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­  NAV ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­ -->
+  <nav class="flex justify-center gap-6 mb-4">
+    <a href="#mapSection" class="hover:underline">Heat Map</a>
+    <a href="#dashSection" class="hover:underline">KPI Dashboard</a>
+    <a href="#tableSection" class="hover:underline">Data Table</a>
+    <a href="#aboutSection" class="hover:underline">About</a>
+  </nav>
+
+  <!-- ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­  HEAT-MAP ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­ -->
+  <section id="mapSection" class="px-4">
+    <h2 class="text-xl font-medium mb-2">Farm • Bodega • School Hotspots</h2>
+    <div id="map" class="rounded shadow"></div>
+  </section>
+
+  <!-- ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­  DASHBOARD ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­ -->
+  <section id="dashSection" class="px-4 mt-10">
+    <h2 class="text-xl font-medium mb-2">KPI Dashboard</h2>
+    <!-- Replace src with your published-to-web Power BI / Tableau / Looker Studio link -->
+    <iframe
+      title="Supply-Chain KPI"
+      src="https://app.powerbi.com/view?r=YOUR_EMBED_LINK_HERE"
+      class="w-full h-[70vh] rounded shadow"
+      loading="lazy"
+    ></iframe>
+  </section>
+
+  <!-- ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­  DATA TABLE ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­ -->
+  <section id="tableSection" class="px-4 mt-10">
+    <h2 class="text-xl font-medium mb-2">Current Site Roster</h2>
+    <!-- Tabulator will replace this div -->
+    <div id="data-table" class="bg-white rounded shadow"></div>
+  </section>
+
+  <!-- ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­  FOOTER / ABOUT ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­ -->
+  <section id="aboutSection" class="px-4 mt-10 mb-14">
+    <h2 class="text-xl font-medium mb-2">About This Project</h2>
+    <p>
+      Prototype created by the Newark Bodega Project team to visualize the local
+      supply-chain nexus between Farms, Bodegas, and Schools. Data refreshes
+      nightly from a shared Google Sheet.
+    </p>
+  </section>
+
+  <!-- ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­  JAVASCRIPT ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­ -->
+  <script>
+    /* ========== 1)   INITIALIZE LEAFLET MAP ========== */
+    const map = L.map("map").setView([40.735, -74.17], 12); // Center on Newark
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors",
+    }).addTo(map);
+
+    /* ========== 2)   SAMPLE HEAT DATA (lat, lon, weight) ========== */
+    // Replace with fetch from your live CSV / API
+    const samplePoints = [
+      [40.7402, -74.18, 1], // Farm
+      [40.722, -74.168, 1], // Bodega
+      [40.75, -74.15, 1], // School
+      // ...
+    ];
+    L.heatLayer(samplePoints, {
+      radius: 25,
+      blur: 15,
+      maxZoom: 17,
+    }).addTo(map);
+
+    /* ========== 3)   POPULATE TABULATOR TABLE ========== */
+    const csvUrl =
+      "https://docs.google.com/spreadsheets/d/e/XXXXXXXX/pub?gid=0&single=true&output=csv"; // ← publish your sheet
+
+    Papa.parse(csvUrl, {
+      download: true,
+      header: true,
+      dynamicTyping: true,
+      complete: (results) => {
+        new Tabulator("#data-table", {
+          data: results.data,
+          layout: "fitColumns",
+          pagination: true,
+          paginationSize: 10,
+          movableColumns: true,
+          columns: [
+            { title: "Name", field: "Name", headerFilter: true },
+            { title: "Type", field: "Type", headerFilter: "select" },
+            { title: "City", field: "City", headerFilter: true },
+            { title: "Last Updated", field: "last_updated" },
+          ],
+        });
+      },
+    });
+  </script>
+</body>
+</html>

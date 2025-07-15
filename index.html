@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rutgers Newark Bodega Project</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+<body>
+  <header class="sticky-header">
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="./Map/map.html">Interactive Map</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#mission">Mission</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#kpis">Data Visualization</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+    </nav>
+    <div class="logo-bar">
+      <img src="images/7.png" alt="NJ STEM Ecosystem Logo" />
+      <img src="images/6.png" alt="USDA Logo" />
+      <img src="images/5.png" alt="Rutgers Logo" />
+      <img src="images/4.png" alt="BCC Logo" />
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Rutgers Newark Bodega Project</h1>
+      <p>Building a sustainable, data-informed, and hyperlocal food supply chain linking farms to bodegas.</p>
+    </div>
+  </section>
+
+  <section id="about" class="content-section">
+    <h2>About the Project</h2>
+    <p>This community-driven initiative is designed to create a resilient food supply chain that links local farms and school gardens with Newark's bodegas. This model aims to reflect the value that food access is a right for all.</p>
+    <p>Supported by Bergen Community College, a federally designated Hispanic-Serving Institution, and Rutgers Business School–Newark, a hub for innovation in urban economic development.</p>
+    <p>Also funded by the USDA and NIFA to support hands-on leadership training in agriculture, business, food systems, and environmental science.</p>
+  </section>
+
+  <section id="mission" class="content-section">
+    <h2>Mission & Objectives</h2>
+    <p><strong>Mission:</strong> Empower Bergen students with hands-on skills in designing and implementing sustainable food supply chains in urban environments.</p>
+    <p><strong>Objective:</strong> Develop a prototype for the Newark Bodegas/Corner Market supply chain that connects farms to small businesses, and support ongoing research in sustainable urban logistics.</p>
+    <p><strong>Program Dates:</strong> June 30, 2025 - July 24, 2025</p>
+  </section>
+
+  <section id="kpis" class="content-section">
+    <h2>Goal Key Performance Indicators (KPIs)</h2>
+    <ul>
+      <li><strong>Inventory Shortage:</strong> Lost inventory due to theft, fraud, damage, or miscounts.</li>
+      <li><strong>Supplier Lead Time:</strong> Time from order to shipment.</li>
+      <li><strong>Warehouse Utilization:</strong> Used vs. total warehouse space.</li>
+      <li><strong>Cold Chain Compliance:</strong> Safe temperature control in transport.</li>
+      <li><strong>Delivery Time Variability:</strong> Difference between expected and actual delivery.</li>
+      <li><strong>Delivery Accuracy:</strong> % of on-time, undamaged deliveries.</li>
+    </ul>
+  </section>
+
+  <section class="content-section">
+    <h2>Urban Agriculture: Indoor Vertical Farming</h2>
+    <ul>
+      <li>Enables farming in cities and ensures year-round production.</li>
+      <li>Reduces emissions and increases local food security.</li>
+      <li>Uses controlled environments for light, water, and nutrients.</li>
+      <li>Reduces pests and supports multiple harvests per year.</li>
+    </ul>
+  </section>
+
+  <section id="team" class="content-section">
+    <h2>Meet Team Flow Chain</h2>
+    <div class="team-grid">
+      <div class="team-card"><img src="images/edward.jpg" alt="Edward Sanchez"><h3>Dr. Edward Sanchez</h3><p>Program Director</p></div>
+      <div class="team-card"><img src="images/kevin.jpg" alt="Kevin Kim"><h3>Kevin Kim</h3><p>Student Coordinator</p></div>
+      <div class="team-card"><img src="images/jensy.jpg" alt="Jensy Jimenez"><h3>Jensy Jimenez</h3><p>Lead Student Coordinator</p></div>
+      <div class="team-card"><img src="images/michael.jpg" alt="Michael La Torre"><h3>Michael La Torre</h3><p>Student</p></div>
+      <div class="team-card"><img src="images/estrella.jpg" alt="Estrella Luna"><h3>Estrella Luna</h3><p>Student</p></div>
+      <div class="team-card"><img src="images/hansel.jpg" alt="Hansel Asmar"><h3>Hansel Asmar</h3><p>Student</p></div>
+      <div class="team-card"><img src="images/esteban.jpg" alt="Esteban Martinez"><h3>Esteban Martinez</h3><p>Student</p></div>
+      <div class="team-card"><img src="images/riley.jpg" alt="Riley O’Sullivan"><h3>Riley O’Sullivan</h3><p>Student</p></div>
+      <div class="team-card"><img src="images/shanandra.jpg" alt="Shanandra Ubiera"><h3>Shanandra Ubiera</h3><p>Student</p></div>
+    </div>
+  </section>
+
+  <!-- <section id="form" class="content-section">
+    <h2>Student Registration</h2>
+    <form action="#" method="post">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="school">School:</label>
+      <input type="text" id="school" name="school" required />
+      <label for="interest">Why are you interested?</label>
+      <textarea id="interest" name="interest" rows="4" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section> -->
+
+  <footer>
+    <p>Contact: <a href="mailto:esanchez@bergen.edu">esanchez@bergen.edu</a></p>
+    <p>&copy; 2025 Rutgers–Bergen Bodega Project</p>
+  </footer>
+
+  <script>
+    ScrollReveal().reveal('.content-section', {
+      distance: '50px',
+      duration: 800,
+      easing: 'ease-out',
+      origin: 'bottom',
+      interval: 100
+    });
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

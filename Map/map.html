@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fresh-Produce Heatmap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
+  <!-- MarkerCluster CSS (optional) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"
+  />
+  <!-- Your custom styles -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header class="sticky-header">
+    <nav>
+      <ul class="menu">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="map.html">Interactive Map</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#mission">Mission</a></li>
+        <li><a href="../index.html#schedule">Schedule</a></li>
+        <li><a href="../index.html#kpis">KPIs</a></li>
+        <li><a href="../index.html#team">Team</a></li>
+      </ul>
+    </nav>
+    <div class="logo-bar">
+      <img src="../images/7.png" alt="NJ STEM Ecosystem Logo" />
+      <img src="../images/6.png" alt="USDA Logo" />
+      <img src="../images/5.png" alt="Rutgers Logo" />
+      <img src="../images/4.png" alt="BCC Logo" />
+    </div>
+  </header>
+  <div id="map">
+  </div>
+  <div class="center-controls">
+    <label>Address: <input type="text" id="addressInput" placeholder="Enter address" /></label>
+    <label>Lat: <input type="number" id="latInput" step="any" placeholder="Latitude" /></label>
+    <label>Lng: <input type="number" id="lngInput" step="any" placeholder="Longitude" /></label>
+    <label>Radius (km): <input type="number" id="radiusInput" min="0" step="any" value="1" /></label>
+    <button id="centerFilterBtn">Center / Filter</button>
+  </div>
+  <div class="export-controls">
+    <button id="exportImgBtn">Export as Image</button>
+    <button id="shareLinkBtn">Share Map Link</button>
+    <button id="printBtn">Print</button>
+  </div>
+  <div class="layer-controls">
+    <button id="layerModeBtn">Switch to Cluster View</button>
+    <button id="borderToggleBtn">Hide Newark Border</button>
+  </div>
+  <div class="controls">
+    <label class="toggle-label">
+      <input type="checkbox" id="produceToggle" checked>
+      Fresh Food
+    </label>
+    <label class="toggle-label">
+      <input type="checkbox" id="fastfoodToggle" checked>
+      Fast Food
+    </label>
+    <label class="slider-label">
+      Intensity:
+      <input type="range" id="intensitySlider" min="0.1" max="1" step="0.05" value="1">
+    </label>
+    <label class="slider-label">
+      Size:
+      <input type="range" id="sizeSlider" min="2" max="30" step="1" value="6">
+    </label>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Heat plugin -->
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+  <!-- MarkerCluster plugin -->
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  <!-- leaflet-pip for point-in-polygon -->
+  <script src="https://unpkg.com/leaflet-pip/leaflet-pip.min.js"></script>
+  <!-- leaflet-image for export as image -->
+  <script src="https://unpkg.com/leaflet-image/leaflet-image.js"></script>
+  <!-- html2canvas for export as image (for legend) -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <!-- Your map logic -->
+  <script src="../script.js"></script>
+</body>
+</html>
