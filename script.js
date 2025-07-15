@@ -167,6 +167,12 @@ if (typeof L !== 'undefined' && document.getElementById('map')) {
     if (!showHeatmap) return;
     const intensity = intensitySlider ? parseFloat(intensitySlider.value) : 1;
     const size = sizeSlider ? parseInt(sizeSlider.value, 10) : 6;
+    
+    // Debug logging
+    console.log('Slider values:', { intensity, size });
+    console.log('Intensity slider element:', intensitySlider);
+    console.log('Size slider element:', sizeSlider);
+    
     // Update produce heatmap
     if (produceHeat && produceHeatDataOriginal.length > 0) {
       produceHeat.setLatLngs(produceHeatDataOriginal);
@@ -439,12 +445,15 @@ if (typeof L !== 'undefined' && document.getElementById('map')) {
   // Helper: Show/hide heatmap or clusters
   function updateLayerMode() {
     if (showHeatmap) {
-      if (produceHeat) produceHeat.addTo(map); else {}
-      if (fastFoodHeat) fastFoodHeat.addTo(map); else {}
+      if (produceHeat) produceHeat.addTo(map);
+      if (fastFoodHeat) fastFoodHeat.addTo(map);
       if (produceCluster) map.removeLayer(produceCluster);
       if (fastFoodCluster) map.removeLayer(fastFoodCluster);
       if (layerModeBtn) layerModeBtn.textContent = 'Switch to Cluster View';
-      updateHeatmapOptions(); // <-- Ensure heatmap reflects current slider values
+      // Force re-apply heatmap options after a short delay to ensure layers are added
+      setTimeout(() => {
+        updateHeatmapOptions();
+      }, 100);
     } else {
       if (produceCluster) produceCluster.addTo(map);
       if (fastFoodCluster) fastFoodCluster.addTo(map);
@@ -510,29 +519,81 @@ if (typeof L !== 'undefined' && document.getElementById('map')) {
       // Save current state
       const prevShowHeatmap = showHeatmap;
       const prevShowBorder = showBorder;
-      // Switch to heatmap and show border
+      const prevCenter = map.getCenter();
+      const prevZoom = map.getZoom();
+      
+      // Switch to heatmap and show border for export
       showHeatmap = true;
       showBorder = true;
       updateLayerMode();
       updateBorder();
-      // Wait a tick for map to update
+      
+      // Ensure heatmap options are applied for export
       setTimeout(() => {
-        window.leafletImage(map, function(err, canvas) {
-          // Restore previous state
-          showHeatmap = prevShowHeatmap;
-          showBorder = prevShowBorder;
-          updateLayerMode();
-          updateBorder();
-          if (err) {
-            alert('Error exporting map image.');
-            return;
-          }
-          const link = document.createElement('a');
-          link.download = 'map.png';
-          link.href = canvas.toDataURL();
-          link.click();
-        });
-      }, 400); // 400ms to allow map to redraw
+        updateHeatmapOptions();
+        
+        // Wait for layers to fully render, then capture
+        setTimeout(() => {
+          // First capture the map
+          window.leafletImage(map, function(err, mapCanvas) {
+            if (err) {
+              alert('Error exporting map image.');
+              return;
+            }
+            
+            // Then capture the legend using html2canvas
+            const legendElement = document.querySelector('.map-legend');
+            if (legendElement) {
+              html2canvas(legendElement, {
+                backgroundColor: 'rgba(255,255,255,0.97)',
+                scale: 2
+              }).then(function(legendCanvas) {
+                // Create a combined canvas
+                const combinedCanvas = document.createElement('canvas');
+                const ctx = combinedCanvas.getContext('2d');
+                
+                // Set canvas size to accommodate both map and legend
+                const mapWidth = mapCanvas.width;
+                const mapHeight = mapCanvas.height;
+                const legendWidth = legendCanvas.width;
+                const legendHeight = legendCanvas.height;
+                
+                combinedCanvas.width = mapWidth + legendWidth + 20; // 20px padding
+                combinedCanvas.height = Math.max(mapHeight, legendHeight);
+                
+                // Fill with white background
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, combinedCanvas.width, combinedCanvas.height);
+                
+                // Draw map on the left
+                ctx.drawImage(mapCanvas, 0, 0);
+                
+                // Draw legend on the right
+                ctx.drawImage(legendCanvas, mapWidth + 20, 0);
+                
+                // Download the combined image
+                const link = document.createElement('a');
+                link.download = 'map-with-legend.png';
+                link.href = combinedCanvas.toDataURL();
+                link.click();
+              });
+            } else {
+              // If no legend, just download the map
+              const link = document.createElement('a');
+              link.download = 'map.png';
+              link.href = mapCanvas.toDataURL();
+              link.click();
+            }
+            
+            // Restore previous state
+            showHeatmap = prevShowHeatmap;
+            showBorder = prevShowBorder;
+            map.setView(prevCenter, prevZoom, { animate: false });
+            updateLayerMode();
+            updateBorder();
+          });
+        }, 300); // Wait for heatmap to render
+      }, 200); // Wait for layer mode update
     };
   }
   if (shareLinkBtn) {

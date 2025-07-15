@@ -172,6 +172,10 @@ footer a {
   margin-left: 0.5em;
   width: 90px;
   accent-color: #38bdf8;
+  /* Ensure full range is accessible */
+  padding: 0;
+  margin-right: 0;
+  box-sizing: border-box;
 }
 @media (max-width: 700px) {
   .controls {
@@ -625,9 +629,9 @@ footer a {
     max-height: 2.2em !important;
   }
   .map-page .slider-label input[type='range'] {
-    width: 40px !important;
-    min-width: 30px !important;
-    max-width: 60px !important;
+    width: 80px !important;
+    min-width: 60px !important;
+    max-width: 120px !important;
   }
   .map-page .export-controls,
   .map-page .layer-controls,
