@@ -482,11 +482,31 @@ footer a {
   }
   .logo-bar {
     flex-direction: row !important;
-    flex-wrap: wrap;
+    flex-wrap: nowrap !important;
+    gap: 0.2em !important;
+    padding: 0.3em 0 0.3em 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
   .logo-bar img {
-    height: 28px;
-    max-width: 60px;
+    height: 18px !important;
+    max-width: 36px !important;
+    margin: 0 0.1em !important;
+  }
+  .menu {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.2em !important;
+    padding: 0.3em 0 0.3em 0 !important;
+    font-size: 1em !important;
+    align-items: center !important;
+    justify-items: center !important;
+  }
+  .menu li {
+    width: 100%;
+    text-align: center;
+    margin: 0 !important;
+    padding: 0.2em 0 !important;
   }
   .map-page .logo-bar {
     display: none !important;
@@ -608,6 +628,29 @@ footer a {
     width: 40px !important;
     min-width: 30px !important;
     max-width: 60px !important;
+  }
+  .map-page .export-controls,
+  .map-page .layer-controls,
+  .map-page .controls {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3em !important;
+    padding: 0.2em 0.1em !important;
+    width: 100vw !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+  }
+  .map-page .controls label,
+  .map-page .controls input,
+  .map-page .controls button {
+    margin: 0 0.2em !important;
+    padding: 0.1em 0.2em !important;
+    font-size: 0.85em !important;
+    min-width: unset !important;
+    max-width: 120px !important;
+    flex: 0 1 auto;
   }
 }
 
