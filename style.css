@@ -490,6 +490,11 @@ footer a {
   }
   .map-page .logo-bar {
     display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
   }
   .controls, .center-controls, .layer-controls, .export-controls {
     flex-direction: column;
@@ -572,6 +577,37 @@ footer a {
     padding: 0.5em 0.7em !important;
     min-width: 0 !important;
     font-size: 0.98em !important;
+  }
+  .map-page .controls,
+  .map-page .center-controls,
+  .map-page .layer-controls,
+  .map-page .export-controls {
+    font-size: 0.78em !important;
+    padding: 0.1em 0.1em !important;
+    gap: 0.1em !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+  }
+  .map-page .controls label,
+  .map-page .center-controls label {
+    font-size: 0.85em !important;
+    margin-bottom: 0.1em !important;
+  }
+  .map-page .controls input,
+  .map-page .center-controls input,
+  .map-page .controls button,
+  .map-page .center-controls button {
+    font-size: 0.85em !important;
+    padding: 0.15em 0.1em !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    min-height: 1.8em !important;
+    max-height: 2.2em !important;
+  }
+  .map-page .slider-label input[type='range'] {
+    width: 40px !important;
+    min-width: 30px !important;
+    max-width: 60px !important;
   }
 }
 
