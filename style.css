@@ -134,6 +134,8 @@ footer a {
   height: 60vh;
   min-height: 400px;
   width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* Beautify map controls at the bottom */
@@ -580,6 +582,8 @@ footer a {
     height: 45vh !important;
     min-height: 220px;
     margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
   }
   .content-section {
     padding: 1em 0.3em;
@@ -684,6 +688,7 @@ button:active {
   width: 100vw;
   max-width: 100vw;
   margin: 0;
+  overflow: hidden !important;
 }
 #control-panel {
   background: #fff;
@@ -752,6 +757,7 @@ button:active {
   width: 100%;
   max-width: 100vw;
   margin: 0;
+  overflow: hidden !important;
 }
 #map {
   flex: 1 1 0%;
@@ -876,6 +882,9 @@ input[type="text"], input[type="number"], select {
   #map {
     min-height: 300px;
     border-radius: 0 0 1.2rem 1.2rem;
+    border: 3px solid #2563eb;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 }
 
@@ -929,6 +938,7 @@ input[type="text"], input[type="number"], select {
 }
 body, html {
   height: 100%;
+  overflow: hidden !important;
 }
 .map-page {
   min-height: 100vh;

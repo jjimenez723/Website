@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
       center: [40.7357, -74.1724],
       zoom: 13,
       maxBounds: L.latLngBounds([40.65, -74.30], [40.85, -74.05]),
-      maxBoundsViscosity: 1.0
+      maxBoundsViscosity: 1.0,
+      scrollWheelZoom: false // Disable scroll wheel zoom
     });
     window.map = map;
 
