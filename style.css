@@ -936,8 +936,11 @@ input[type="text"], input[type="number"], select {
   height: 100% !important;
   box-sizing: border-box;
 }
-body, html {
+html, body {
   height: 100%;
+  /* Remove overflow: hidden here to restore scrollbars globally */
+}
+.map-page body {
   overflow: hidden !important;
 }
 .map-page {

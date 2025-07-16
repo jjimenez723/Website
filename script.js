@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
       [40.58, -72.12]   // Northeast corner
     );
     // 1) Initialize map
+    const isMapPage = document.body.classList.contains('map-page');
     const map = L.map('map', {
       minZoom: 12,
       maxZoom: 16,
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
       zoom: 13,
       maxBounds: L.latLngBounds([40.65, -74.30], [40.85, -74.05]),
       maxBoundsViscosity: 1.0,
-      scrollWheelZoom: false // Disable scroll wheel zoom
+      scrollWheelZoom: isMapPage ? false : true // Only disable scroll wheel zoom on map page
     });
     window.map = map;
 
