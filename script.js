@@ -614,74 +614,109 @@ document.addEventListener('DOMContentLoaded', function() {
         // Force map to resize after panel collapse
         setTimeout(() => {
           map.invalidateSize();
-        }, 350);
-        const mapContainer = document.getElementById('map');
-        // Hide specific legend items for export
-        const legend = document.querySelector('.map-legend');
-        let hiddenLegendItems = [];
-        if (legend) {
-          hiddenLegendItems = Array.from(legend.children).filter(div => {
-            return div.textContent.includes('Newark boundary') ||
-                   div.textContent.includes('Filter radius') ||
-                   div.textContent.includes('Cluster: Multiple locations');
-          });
-          hiddenLegendItems.forEach(div => div.style.display = 'none');
-        }
-        // Add a temporary title for export
-        const tempTitle = document.createElement('div');
-        tempTitle.style.cssText = `
-          position: absolute;
-          top: 1.5rem;
-          left: 50%;
-          transform: translateX(-50%);
-          background: rgba(255,255,255,0.95);
-          padding: 8px 16px;
-          border-radius: 8px;
-          font-weight: bold;
-          font-size: 16px;
-          color: #2563eb;
-          z-index: 2002;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        `;
-        tempTitle.textContent = 'Newark Food Access Map';
-        mapContainer.appendChild(tempTitle);
-        setTimeout(() => {
-          html2canvas(mapContainer, {
-            backgroundColor: '#ffffff',
-            scale: 2,
-            useCORS: true,
-            allowTaint: true,
-            foreignObjectRendering: false,
-            logging: false,
-            width: mapContainer.offsetWidth,
-            height: mapContainer.offsetHeight
-          }).then(function(canvas) {
-            // Download the image
-            const link = document.createElement('a');
-            link.download = 'newark-food-map-export.png';
-            link.href = canvas.toDataURL();
-            link.click();
-            // Remove temporary title
-            if (tempTitle && tempTitle.parentNode) {
-              tempTitle.parentNode.removeChild(tempTitle);
+          // Remove overlays for export
+          let borderWasVisible = false, radiusWasVisible = false, polygonWasVisible = false;
+          if (typeof newarkBorderLayer !== 'undefined' && newarkBorderLayer) {
+            borderWasVisible = map.hasLayer(newarkBorderLayer);
+            map.removeLayer(newarkBorderLayer);
+          }
+          if (typeof radiusCircle !== 'undefined' && radiusCircle) {
+            radiusWasVisible = map.hasLayer(radiusCircle);
+            map.removeLayer(radiusCircle);
+          }
+          if (typeof newarkPolygon !== 'undefined' && newarkPolygon) {
+            polygonWasVisible = map.hasLayer(newarkPolygon);
+            map.removeLayer(newarkPolygon);
+          }
+          // Wait longer for overlays to redraw
+          setTimeout(() => {
+            // Hide specific legend items for export
+            const legend = document.querySelector('.map-legend');
+            let hiddenLegendItems = [];
+            if (legend) {
+              hiddenLegendItems = Array.from(legend.children).filter(div => {
+                return div.textContent.includes('Newark boundary') ||
+                       div.textContent.includes('Filter radius') ||
+                       div.textContent.includes('Cluster: Multiple locations');
+              });
+              hiddenLegendItems.forEach(div => div.style.display = 'none');
             }
-            // Restore legend items
-            hiddenLegendItems.forEach(div => div.style.display = '');
-            if (exportSpinner) exportSpinner.style.display = 'none';
-            exportImgBtn.removeAttribute('disabled');
-            controlPanel.classList.remove('collapsed');
-          }).catch(function(error) {
-            if (tempTitle && tempTitle.parentNode) {
-              tempTitle.parentNode.removeChild(tempTitle);
-            }
-            // Restore legend items
-            hiddenLegendItems.forEach(div => div.style.display = '');
-            if (exportSpinner) exportSpinner.style.display = 'none';
-            exportImgBtn.removeAttribute('disabled');
-            controlPanel.classList.remove('collapsed');
-            alert('Export failed: ' + error.message);
-          });
-        }, 800);
+            // Add a temporary title for export
+            const mapContainer = document.getElementById('map');
+            const tempTitle = document.createElement('div');
+            tempTitle.style.cssText = `
+              position: absolute;
+              top: 1.5rem;
+              left: 50%;
+              transform: translateX(-50%);
+              background: rgba(255,255,255,0.95);
+              padding: 8px 16px;
+              border-radius: 8px;
+              font-weight: bold;
+              font-size: 16px;
+              color: #2563eb;
+              z-index: 2002;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            `;
+            tempTitle.textContent = 'Newark Food Access Map';
+            mapContainer.appendChild(tempTitle);
+            html2canvas(mapContainer, {
+              backgroundColor: '#ffffff',
+              scale: 2,
+              useCORS: true,
+              allowTaint: true,
+              foreignObjectRendering: false,
+              logging: false,
+              width: mapContainer.offsetWidth,
+              height: mapContainer.offsetHeight
+            }).then(function(canvas) {
+              // Download the image
+              const link = document.createElement('a');
+              link.download = 'newark-food-map-export.png';
+              link.href = canvas.toDataURL();
+              link.click();
+              // Remove temporary title
+              if (tempTitle && tempTitle.parentNode) {
+                tempTitle.parentNode.removeChild(tempTitle);
+              }
+              // Restore legend items
+              hiddenLegendItems.forEach(div => div.style.display = '');
+              // Restore overlays
+              if (borderWasVisible && typeof newarkBorderLayer !== 'undefined' && newarkBorderLayer) {
+                map.addLayer(newarkBorderLayer);
+              }
+              if (radiusWasVisible && typeof radiusCircle !== 'undefined' && radiusCircle) {
+                map.addLayer(radiusCircle);
+              }
+              if (polygonWasVisible && typeof newarkPolygon !== 'undefined' && newarkPolygon) {
+                map.addLayer(newarkPolygon);
+              }
+              if (exportSpinner) exportSpinner.style.display = 'none';
+              exportImgBtn.removeAttribute('disabled');
+              controlPanel.classList.remove('collapsed');
+            }).catch(function(error) {
+              if (tempTitle && tempTitle.parentNode) {
+                tempTitle.parentNode.removeChild(tempTitle);
+              }
+              // Restore legend items
+              hiddenLegendItems.forEach(div => div.style.display = '');
+              // Restore overlays
+              if (borderWasVisible && typeof newarkBorderLayer !== 'undefined' && newarkBorderLayer) {
+                map.addLayer(newarkBorderLayer);
+              }
+              if (radiusWasVisible && typeof radiusCircle !== 'undefined' && radiusCircle) {
+                map.addLayer(radiusCircle);
+              }
+              if (polygonWasVisible && typeof newarkPolygon !== 'undefined' && newarkPolygon) {
+                map.addLayer(newarkPolygon);
+              }
+              if (exportSpinner) exportSpinner.style.display = 'none';
+              exportImgBtn.removeAttribute('disabled');
+              controlPanel.classList.remove('collapsed');
+              alert('Export failed: ' + error.message);
+            });
+          }, 1500); // Wait 1500ms after invalidateSize and overlay redraw
+        }, 350); // Wait 350ms for panel transition
       };
     }
     if (shareLinkBtn) {
