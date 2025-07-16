@@ -5,16 +5,10 @@
   <title>Fresh-Produce Heatmap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet/dist/leaflet.css"
-  />
+  <!-- Leaflet CSS (force 1.5.1) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
   <!-- MarkerCluster CSS (optional) -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
   <!-- Your custom styles -->
   <link rel="stylesheet" href="../style.css" />
 </head>
@@ -24,7 +18,7 @@
       <ul class="menu">
         <li><a href="../index.html">Home</a></li>
         <li><a href="map.html">Fast vs. Fresh Food Map</a></li>
-        <li><a href="../index.html#kpis">KPIs</a></li>
+        <li><a href="../index.html#kpis">Data Visualization</a></li>
         <li><a href="../index.html#team">Team</a></li>
       </ul>
     </nav>
@@ -35,55 +29,95 @@
       <img src="../images/4.png" alt="BCC Logo" />
     </div>
   </header>
-  <div id="map">
+  <div id="main-flex-container">
+    <aside id="control-panel">
+      <h2 class="panel-title" tabindex="0">Map Controls</h2>
+      <div id="exportSpinner" role="status" aria-live="polite" aria-label="Exporting, please wait"></div>
+      <div class="panel-section">
+        <h3 class="panel-section-title">Layers</h3>
+        <div class="controls" aria-label="Layer toggles">
+          <label class="toggle-label">
+            <input type="checkbox" id="produceToggle" checked>
+            Fresh Food
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="fastfoodToggle" checked>
+            Fast Food
+          </label>
+        </div>
+        <div class="controls" aria-label="Heatmap controls">
+          <label class="slider-label">
+            Intensity:
+            <input type="range" id="intensitySlider" min="0.1" max="1" step="0.05" value="1">
+          </label>
+          <label class="slider-label">
+            Size:
+            <input type="range" id="sizeSlider" min="5" max="60" step="1" value="40">
+          </label>
+        </div>
+      </div>
+      <hr class="panel-divider" />
+      <div class="panel-section">
+        <h3 class="panel-section-title">Filter & Center</h3>
+        <button id="centerFilterBtn">Center / Filter</button>
+        <div class="center-controls" aria-label="Filter controls">
+          <div class="row">
+            <label>Address: <input type="text" id="addressInput" placeholder="Enter address" style="width:100%" /></label>
+            <label>Radius (km): <input type="number" id="radiusInput" min="0" step="any" value="1" style="width:100%" /></label>
+          </div>
+          <div class="row">
+            <label>Lat: <input type="number" id="latInput" step="any" placeholder="Latitude" style="width:100%" /></label>
+            <label>Lng: <input type="number" id="lngInput" step="any" placeholder="Longitude" style="width:100%" /></label>
+          </div>
+        </div>
+      </div>
+      <hr class="panel-divider" />
+      <div class="panel-section">
+        <h3 class="panel-section-title">Export & Share</h3>
+        <div class="export-controls" aria-label="Export and share controls">
+          <button id="exportImgBtn">Export as Image</button>
+          <button id="shareLinkBtn">Share Map Link</button>
+          <button id="printBtn">Print</button>
+        </div>
+        <div class="legend-export-controls">
+          <label for="legendPosition"><strong>Legend Position for Export:</strong></label>
+          <select id="legendPosition" aria-label="Legend position for export" style="width:100%">
+            <option value="top-right">Top Right</option>
+            <option value="top-left">Top Left</option>
+            <option value="bottom-right">Bottom Right</option>
+            <option value="bottom-left" selected>Bottom Left</option>
+          </select>
+        </div>
+      </div>
+      <hr class="panel-divider" />
+      <div class="panel-section">
+        <h3 class="panel-section-title">Map Display</h3>
+        <div class="layer-controls" aria-label="Map display controls">
+          <button id="layerModeBtn">Switch to Cluster View</button>
+          <button id="borderToggleBtn">Hide Newark Border</button>
+        </div>
+      </div>
+    </aside>
+    <button id="control-panel-toggle" aria-label="Toggle controls" title="Show/hide controls" tabindex="0">
+      <span class="arrow" aria-hidden="true">❮</span>
+      <span class="visually-hidden">Toggle control panel</span>
+    </button>
+    <main id="map-area">
+      <div id="map"></div>
+    </main>
   </div>
-  <div class="center-controls">
-    <label>Address: <input type="text" id="addressInput" placeholder="Enter address" /></label>
-    <label>Lat: <input type="number" id="latInput" step="any" placeholder="Latitude" /></label>
-    <label>Lng: <input type="number" id="lngInput" step="any" placeholder="Longitude" /></label>
-    <label>Radius (km): <input type="number" id="radiusInput" min="0" step="any" value="1" /></label>
-    <button id="centerFilterBtn">Center / Filter</button>
-  </div>
-  <div class="export-controls">
-    <button id="exportImgBtn">Export as Image</button>
-    <button id="shareLinkBtn">Share Map Link</button>
-    <button id="printBtn">Print</button>
-  </div>
-  <div class="layer-controls">
-    <button id="layerModeBtn">Switch to Cluster View</button>
-    <button id="borderToggleBtn">Hide Newark Border</button>
-  </div>
-  <div class="controls">
-    <label class="toggle-label">
-      <input type="checkbox" id="produceToggle" checked>
-      Fresh Food
-    </label>
-    <label class="toggle-label">
-      <input type="checkbox" id="fastfoodToggle" checked>
-      Fast Food
-    </label>
-    <label class="slider-label">
-      Intensity:
-      <input type="range" id="intensitySlider" min="0.1" max="1" step="0.05" value="1">
-    </label>
-    <label class="slider-label">
-      Size:
-      <input type="range" id="sizeSlider" min="2" max="30" step="1" value="6">
-    </label>
-  </div>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Leaflet JS (force 1.5.1) -->
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  <!-- leaflet-image for export as image (must come right after Leaflet) -->
+  <script src="https://unpkg.com/leaflet-image/leaflet-image.js"></script>
   <!-- Heat plugin -->
   <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
   <!-- MarkerCluster plugin -->
   <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
   <!-- leaflet-pip for point-in-polygon -->
   <script src="https://unpkg.com/leaflet-pip/leaflet-pip.min.js"></script>
-  <!-- leaflet-image for export as image -->
-  <script src="https://unpkg.com/leaflet-image/leaflet-image.js"></script>
   <!-- html2canvas for export as image (for legend) -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" crossorigin="anonymous"></script>
   <!-- Your map logic -->
   <script src="../script.js"></script>
 </body>

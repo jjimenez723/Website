@@ -28,4 +28,4 @@
     {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-74.20495489999999, 40.73977000000001]}, "properties": {"name": "R&R Grocery", "type": "Fresh Food", "description": "8 mins DRIVING, 20 mins via BUS"}},
     {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-74.20351029999999, 40.7314356]}, "properties": {"name": "New Mega Supermarket", "type": "Fresh Food", "description": "10 mins DRIVING, 15 mins via BUS"}}
   ]
-} 
+}
