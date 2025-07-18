@@ -499,10 +499,11 @@ footer a {
   .map-legend {
     left: 50%;
     transform: translateX(-50%);
-    bottom: 0.5rem;
-    padding: 0.7rem 1rem;
+    bottom: 1rem;
+    padding: 0.5rem 0.8rem;
     min-width: 0;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    max-width: 85vw;
   }
 }
 
@@ -513,28 +514,39 @@ footer a {
   background: rgba(255,255,255,0.97);
   box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
   border-radius: 1.2rem;
-  padding: 1.1rem 1.5rem;
+  padding: 1rem 1.2rem;
   z-index: 1100;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #1e293b;
-  min-width: 210px;
+  min-width: 180px;
   max-width: 90vw;
-  line-height: 1.7;
+  line-height: 1.5;
 }
 #map .map-legend div {
   display: flex;
   align-items: center;
-  gap: 0.7em;
-  margin-bottom: 0.2em;
+  gap: 0.5em;
+  margin-bottom: 0.15em;
+  font-size: 0.9em;
 }
 @media (max-width: 700px) {
   #map .map-legend {
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0.5rem;
-    padding: 0.7rem 1rem;
-    min-width: 0;
-    font-size: 0.95rem;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    bottom: 1rem !important;
+    padding: 0.5rem 0.8rem !important;
+    min-width: 0 !important;
+    font-size: 0.85rem !important;
+    max-width: 85vw !important;
+    z-index: 1300 !important;
+  }
+  #control-panel.compact ~ #map-area #map .map-legend {
+    left: calc(50% + 60px) !important;
+    transform: translateX(-50%) !important;
+  }
+  #control-panel.compact.collapsed ~ #map-area #map .map-legend {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
   }
 }
 
@@ -950,48 +962,42 @@ input[type="text"], input[type="number"], select {
     height: 100vh;
   }
   #control-panel {
-    width: 100vw;
-    min-width: 0;
-    max-width: 100vw;
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    z-index: 1200;
-    border-radius: 0 0 1.2rem 1.2rem;
-    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
-    transform: translateY(0);
-    overflow-y: auto;
-    transition: width 0.3s, min-width 0.3s, max-width 0.3s, padding 0.3s, box-shadow 0.3s;
-    margin: 0;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: 40vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 0.5rem !important;
+    font-size: 0.9em !important;
+    position: relative !important;
+    z-index: 1000 !important;
   }
   #control-panel.collapsed {
-    width: 0 !important;
-    min-width: 0 !important;
-    max-width: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
     overflow: hidden !important;
-    transform: translateY(-110%);
+    padding: 0 !important;
+    margin: 0 !important;
   }
   #control-panel-toggle {
-    top: 60px;
-    left: 100vw;
-    right: unset;
+    display: none !important;
   }
   #control-panel.collapsed ~ #control-panel-toggle {
-    left: 0;
+    display: none !important;
   }
   #map-area {
-    min-height: 300px;
+    flex: 1 !important;
+    min-height: 60vh !important;
+    height: auto !important;
   }
   #map {
-    min-height: 300px;
-    border-radius: 0 0 1.2rem 1.2rem;
-    border: 3px solid #2563eb;
-    box-sizing: border-box;
-    overflow: hidden;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 60vh !important;
   }
 }
 
@@ -1396,12 +1402,13 @@ footer a {
 }
 
 #control-panel.compact {
-  width: 80px !important;
-  min-width: 60px !important;
-  max-width: 100px !important;
-  padding: 0.5rem 0.2rem 0.5rem 0.2rem !important;
-  font-size: 0.85em !important;
+  width: 120px !important;
+  min-width: 100px !important;
+  max-width: 140px !important;
+  padding: 0.5rem 0.3rem 0.5rem 0.3rem !important;
+  font-size: 0.9em !important;
   transition: width 0.3s, min-width 0.3s, max-width 0.3s, padding 0.3s, font-size 0.3s;
+  overflow: visible !important;
 }
 #control-panel.compact .panel-title,
 #control-panel.compact .panel-section-title,
@@ -1417,44 +1424,72 @@ footer a {
 #control-panel.compact button,
 #control-panel.compact .export-controls button,
 #control-panel.compact .layer-controls button {
-  font-size: 1.1em !important;
-  padding: 0.3em 0.2em !important;
+  font-size: 1em !important;
+  padding: 0.4em 0.3em !important;
   min-width: 0 !important;
   width: 100% !important;
-  margin-bottom: 0.2em !important;
+  margin-bottom: 0.3em !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 #control-panel.compact .controls,
 #control-panel.compact .slider-compact-row,
 #control-panel.compact .export-controls,
 #control-panel.compact .layer-controls {
-  margin-bottom: 2em !important;
+  margin-bottom: 1.5em !important;
   padding: 0.5em 0 !important;
 }
 #control-panel.compact .controls {
   margin-bottom: 1.2em !important;
+  padding-bottom: 0.5em !important;
+  gap: 0.5em !important;
+}
+#control-panel.compact .toggle-label {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.3em !important;
+  padding: 0.3em 0.2em !important;
+  margin-bottom: 0.3em !important;
+  font-size: 0.9em !important;
+  font-weight: 600 !important;
+  color: #015941 !important;
+}
+#control-panel.compact .toggle-label input[type="checkbox"] {
+  margin: 0 !important;
+  transform: scale(1.2) !important;
+}
+#control-panel.compact .toggle-label .short-label {
+  display: inline !important;
+  font-weight: 600 !important;
+  color: #015941 !important;
+}
+#control-panel.compact .toggle-label .long-label {
+  display: none !important;
 }
 #control-panel.compact .slider-compact-row {
-  margin-bottom: 1.2em !important;
+  margin-bottom: 1em !important;
 }
 #control-panel.compact .export-controls {
-  margin-bottom: 1.2em !important;
+  margin-bottom: 1em !important;
 }
 #control-panel.compact .layer-controls {
-  margin-bottom: 1.2em !important;
+  margin-bottom: 1em !important;
 }
 #control-panel.compact .controls,
 #control-panel.compact .export-controls,
 #control-panel.compact .layer-controls {
-  gap: 0.2em !important;
+  gap: 0.3em !important;
   padding: 0 !important;
 }
 #control-panel.compact .panel-section {
-  margin-bottom: 0.2rem !important;
+  margin-bottom: 0.3rem !important;
   padding: 0 !important;
 }
 #control-panel.compact #compactPanelBtn {
-  font-size: 1.3em !important;
-  padding: 0.1em 0.2em !important;
+  font-size: 1.2em !important;
+  padding: 0.2em 0.3em !important;
 }
 
 .hero-text h1, .hero-text p {
@@ -1491,7 +1526,7 @@ footer a {
 #control-panel.compact .slider-label .short-label { display: inline !important; }
 #control-panel.compact .slider-label .long-label { display: none !important; }
 #control-panel.compact .slider-label input[type="range"] {
-  width: 60px !important;
+  width: 50px !important;
   margin-left: 0.2em;
 }
 #control-panel.compact .export-controls button {
@@ -1521,22 +1556,26 @@ footer a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.7em;
+  gap: 0.8em;
   width: 100%;
+  padding: 0.5em 0;
 }
 #control-panel.compact .slider-label {
   flex-direction: column !important;
   align-items: center !important;
-  gap: 0.2em !important;
+  gap: 0.3em !important;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0.3em 0 !important;
   width: 100%;
+  position: relative;
 }
 #control-panel.compact .slider-label .long-label {
   display: block !important;
-  font-size: 1em;
-  margin-bottom: 0.2em;
+  font-size: 0.85em;
+  margin-bottom: 0.3em;
   text-align: center;
+  font-weight: 600;
+  color: #015941;
 }
 #control-panel.compact .slider-label .short-label {
   display: none !important;
@@ -1546,9 +1585,11 @@ footer a {
   height: 24px !important;
   transform: rotate(-90deg);
   margin: 0 !important;
-  margin-top: 0.2em !important;
-  margin-bottom: 0.2em !important;
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
   display: block;
+  position: relative;
+  z-index: 1;
 }
 
 #control-panel.compact {
@@ -1560,14 +1601,16 @@ footer a {
   left: 0;
   width: 100%;
   margin-bottom: 0 !important;
-  padding-bottom: 1em !important;
+  padding-bottom: 0.8em !important;
+  padding-top: 0.5em !important;
   background: #fff;
   z-index: 2;
   box-shadow: 0 -2px 8px 0 rgba(0,0,0,0.04);
   display: flex !important;
   flex-direction: column;
-  gap: 0.7em;
+  gap: 0.4em;
   align-items: center;
+  border-top: 1px solid #e5e7eb;
 }
 #control-panel.compact .slider-compact-row {
   flex: 1 1 auto;
@@ -1576,20 +1619,22 @@ footer a {
   align-items: center;
   justify-content: center;
   margin-bottom: 0 !important;
-  padding: 0 !important;
-  min-height: 180px;
+  padding: 0.5em 0 !important;
+  min-height: 160px;
 }
 #control-panel.compact .slider-label .long-label {
-  font-size: 0.92em !important;
-  margin-bottom: 0.7em;
+  font-size: 0.8em !important;
+  margin-bottom: 0.6em;
   text-align: center;
+  font-weight: 600;
+  color: #015941;
 }
 #control-panel.compact .slider-label {
   margin-bottom: 1.2em !important;
 }
 #control-panel.compact .controls {
-  margin-bottom: 1.2em !important;
-  padding-bottom: 0.5em !important;
+  margin-bottom: 1em !important;
+  padding-bottom: 0.3em !important;
 }
 
 .gallery-section {
@@ -1787,4 +1832,122 @@ footer a {
   border-radius: 0.4rem;
   padding: 0.6rem 1rem;
   box-shadow: 0 1px 4px 0 rgba(1,89,65,0.04);
+}
+
+@media (max-width: 700px) {
+  #control-panel.compact {
+    width: 120px !important;
+    min-width: 100px !important;
+    max-width: 140px !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: 35vh !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    z-index: 1200 !important;
+    border-radius: 0 0 1rem 1rem !important;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+  #control-panel.compact ~ #map-area {
+    margin-left: 120px !important;
+    width: calc(100% - 120px) !important;
+  }
+  #control-panel.compact.collapsed {
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    overflow: hidden !important;
+  }
+  #control-panel.compact.collapsed ~ #map-area {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .controls, .center-controls, .layer-controls, .export-controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 0.9em;
+    padding: 0.5em 0.3em;
+    gap: 0.5em;
+  }
+  .panel-title {
+    font-size: 1.1em !important;
+    margin-bottom: 0.5em !important;
+    text-align: center !important;
+  }
+  .panel-section-title {
+    font-size: 1em !important;
+    margin-bottom: 0.3em !important;
+    text-align: center !important;
+  }
+  .panel-divider {
+    margin: 0.5em 0 !important;
+  }
+  .legend-export-controls {
+    margin-top: 0.5em !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #control-panel.compact {
+    width: 100px !important;
+    min-width: 80px !important;
+    max-width: 120px !important;
+    font-size: 0.8em !important;
+    padding: 0.3rem 0.2rem !important;
+  }
+  #control-panel.compact ~ #map-area {
+    margin-left: 100px !important;
+    width: calc(100% - 100px) !important;
+  }
+  #control-panel.compact button,
+  #control-panel.compact .export-controls button,
+  #control-panel.compact .layer-controls button {
+    font-size: 0.9em !important;
+    padding: 0.3em 0.2em !important;
+  }
+  #control-panel.compact .slider-label input[type="range"] {
+    width: 50px !important;
+    height: 20px !important;
+  }
+  #control-panel.compact .toggle-label {
+    font-size: 0.85em !important;
+    padding: 0.2em 0.1em !important;
+  }
+  #control-panel.compact .slider-label .long-label {
+    font-size: 0.75em !important;
+    margin-bottom: 0.5em;
+  }
+  #control-panel.compact .slider-compact-row {
+    min-height: 140px;
+    gap: 0.6em;
+  }
+  #map .map-legend {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.6rem !important;
+    max-width: 90vw !important;
+  }
+  #control-panel.compact ~ #map-area #map .map-legend {
+    left: calc(50% + 50px) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #control-panel.collapsed ~ #map-area {
+    margin-left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+  }
+  #control-panel.collapsed ~ #map-area #map {
+    height: 100vh !important;
+    min-height: 100vh !important;
+  }
 }

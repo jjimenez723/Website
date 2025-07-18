@@ -340,11 +340,11 @@ document.addEventListener('DOMContentLoaded', function() {
     legendControl.onAdd = function(map) {
       const div = L.DomUtil.create('div', 'map-legend');
       div.innerHTML = `
-        <div><i class="fas fa-apple-alt fresh-food-icon" style="font-size: 18px; margin-right: 8px;"></i> Fresh Food (marker/heat)</div>
-        <div><i class="fas fa-hamburger fast-food-icon" style="font-size: 18px; margin-right: 8px;"></i> Fast Food (marker/heat)</div>
-        <div><span class="legend-line" style="border-color:#008000"></span> Newark boundary</div>
-        <div><span class="legend-circle"></span> Filter radius</div>
-        <div><span class="legend-cluster"></span> Cluster: Multiple locations</div>
+        <div><i class="fas fa-apple-alt fresh-food-icon" style="font-size: 16px; margin-right: 6px;"></i> Fresh Food</div>
+        <div><i class="fas fa-hamburger fast-food-icon" style="font-size: 16px; margin-right: 6px;"></i> Fast Food</div>
+        <div><span class="legend-line" style="border-color:#008000"></span> Newark</div>
+        <div><span class="legend-circle"></span> Filter</div>
+        <div><span class="legend-cluster"></span> Clusters</div>
       `;
       return div;
     };
