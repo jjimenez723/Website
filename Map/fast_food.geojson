@@ -4,6 +4,118 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Smashburger",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1750245,
+          40.6977247
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Dunkin'",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1729107,
+          40.7372903
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Dunkin'",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1715637,
+          40.7352659
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Jollibee",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1929435,
+          40.7394122
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Five Guys",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1750245,
+          40.6977247
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pizza Hut",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1712705,
+          40.7350948
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Shake Shack",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1750245,
+          40.6977247
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Jersey Mike's Subs",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1698661,
+          40.7348164
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Checkers",
         "type": "Fast Food"
       },
@@ -12,20 +124,6 @@
         "coordinates": [
           -74.1893027,
           40.7457864
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Quiznos",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.1768739,
-          40.7413244
         ]
       }
     },
@@ -130,6 +228,34 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "KFC",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.192185,
+          40.741063
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Popeyes Louisiana Kitchen",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1872774,
+          40.7350693
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Sonic Drive-In",
         "type": "Fast Food"
       },
@@ -138,6 +264,20 @@
         "coordinates": [
           -74.1864818,
           40.734592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "30 Burgers",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1718045,
+          40.7359925
         ]
       }
     },
@@ -158,28 +298,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Espiga Dourada 2",
+        "name": "Blaze Pizza",
         "type": "Fast Food"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -74.176206,
-          40.759883
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Family Manor",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.2374317,
-          40.7350611
+          -74.1706605,
+          40.7383468
         ]
       }
     },
@@ -194,20 +320,6 @@
         "coordinates": [
           -74.1703655,
           40.734963
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Jack in the Box",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.1712362,
-          40.7400629
         ]
       }
     },
@@ -298,34 +410,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Delta One Plastics",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.1801589,
-          40.7180389
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "KFC",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.192185,
-          40.741063
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "Domino's Pizza",
         "type": "Fast Food"
       },
@@ -334,20 +418,6 @@
         "coordinates": [
           -74.1511691,
           40.7267177
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Take or Bake Pizza",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.22737,
-          40.746234
         ]
       }
     },
@@ -368,20 +438,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Zaro's Family Bakery",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.163855,
-          40.7344963
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "The Good Eats Experience",
         "type": "Fast Food"
       },
@@ -396,34 +452,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Jimmy John's",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.17191,
-          40.7394285
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Jersey Mike's Subs",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.1698661,
-          40.7348164
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "QDOBA Mexican Eats",
         "type": "Fast Food"
       },
@@ -432,20 +460,6 @@
         "coordinates": [
           -74.1712362,
           40.7400629
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Popeyes Louisiana Kitchen",
-        "type": "Fast Food"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.1872774,
-          40.7350693
         ]
       }
     },
@@ -522,7 +536,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "WOW Caf\u00e9 & Wingery",
+        "name": "WOW Cafe & Wingery",
         "type": "Fast Food"
       },
       "geometry": {
@@ -586,6 +600,34 @@
         "coordinates": [
           -74.2238219,
           40.7453272
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Family Manor",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2374317,
+          40.7350611
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Espiga Dourada 2",
+        "type": "Fast Food"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.176206,
+          40.759883
         ]
       }
     }

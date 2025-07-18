@@ -206,9 +206,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize sliders after a short delay to ensure DOM is ready
     setTimeout(initializeSliders, 100);
 
-    // 4) Load local produce.geojson
+    // 4) Load fixed fresh food GeoJSON
     // When creating the heatmap layers, use the same default as the slider (e.g., 40)
-    fetch('produce.geojson')
+    fetch('fixed_fresh_food.geojson')
       .then(r => r.json())
       .then(data => {
         // heatmap data
@@ -228,10 +228,22 @@ document.addEventListener('DOMContentLoaded', function() {
         
         data.features.forEach(f => {
           const [lon, lat] = f.geometry.coordinates;
+          const name = f.properties.name || 'Fresh Food Location';
+          const type = f.properties.type || 'Fresh Food';
+          const description = f.properties.description || '';
+          const distance1 = f.properties.distance_rutgers_1 || '';
+          const distance2 = f.properties.distance_rutgers_2 || '';
+          
+          let popupContent = `<strong>${name}</strong><br>Type: ${type}`;
+          if (description) popupContent += `<br>${description}`;
+          if (distance1) popupContent += `<br>Distance: ${distance1}`;
+          if (distance2) popupContent += `<br>${distance2}`;
+          const source = f.properties.source || '';
+          if (source) popupContent += `<br><small>Source: ${source}</small>`;
+          popupContent += `<br><a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}" target="_blank">Directions</a>`;
+          
           const m = L.marker([lat, lon], { icon: freshFoodIcon })
-            .bindPopup(`<strong>${f.properties.name}</strong><br>${f.properties.address}
-                        <br><a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}"
-                           target="_blank">Directions</a>`);
+            .bindPopup(popupContent);
           produceCluster.addLayer(m);
         });
         // After initializing, sync heatmap with slider value
@@ -241,19 +253,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 200);
       });
 
-    // 5) Fetch fast food from Overpass
-    const overpassQ = `
-      [out:json][timeout:25];
-      area[name="Newark"]->.a;
-      node["amenity"="fast_food"](area.a);
-      out center;
-    `;
-    fetch('https://overpass-api.de/api/interpreter', {
-      method: 'POST',
-      body: overpassQ
-    })
+    // 5) Fetch fast food from local GeoJSON
+    fetch('fast_food.geojson')
       .then(r => r.json())
-      .then(osm => {
+      .then(data => {
         fastFoodHeatDataOriginal = [];
         fastFoodCluster = L.markerClusterGroup({ chunkedLoading: true });
         
@@ -265,15 +268,15 @@ document.addEventListener('DOMContentLoaded', function() {
           iconAnchor: [12, 12]
         });
         
-        osm.elements.forEach(el => {
-          const lat = el.lat || el.center.lat;
-          const lon = el.lon || el.center.lon;
+        data.features.forEach(feature => {
+          const coords = feature.geometry.coordinates;
+          const lat = coords[1];
+          const lon = coords[0];
           fastFoodHeatDataOriginal.push([lat, lon, 0.5]);
-          const name = el.tags.name || 'Fast Food';
-          const addr = [el.tags['addr:street'], el.tags['addr:housenumber'], el.tags['addr:city']]
-            .filter(Boolean).join(' ');
+          const name = feature.properties.name || 'Fast Food';
+          const type = feature.properties.type || 'Fast Food';
           const m = L.marker([lat, lon], { icon: fastFoodIcon })
-            .bindPopup(`<strong>${name}</strong><br>${addr}
+            .bindPopup(`<strong>${name}</strong><br>${type}
                         <br><a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}"
                            target="_blank">Directions</a>`);
           fastFoodCluster.addLayer(m);
@@ -420,19 +423,16 @@ document.addEventListener('DOMContentLoaded', function() {
       updateFastFoodLayer();
     }
     // After produce loads
-    fetch('produce.geojson')
+    fetch('fixed_fresh_food.geojson')
       .then(r => r.json())
       .then(data => {
         // ... existing code ...
         tryInitLayerToggles();
       });
     // After fast food loads
-    fetch('https://overpass-api.de/api/interpreter', {
-      method: 'POST',
-      body: overpassQ
-    })
+    fetch('fast_food.geojson')
       .then(r => r.json())
-      .then(osm => {
+      .then(data => {
         // ... existing code ...
         tryInitLayerToggles();
       });
@@ -462,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (produceCluster) {
         produceCluster.clearLayers();
         produceHeat.setLatLngs([]);
-        fetch('produce.geojson')
+        fetch('fixed_fresh_food.geojson')
           .then(r => r.json())
           .then(data => {
             const filtered = data.features.filter(f => {
@@ -471,8 +471,21 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             filtered.forEach(f => {
               const [lon, lat] = f.geometry.coordinates;
+              const name = f.properties.name || 'Fresh Food Location';
+              const type = f.properties.type || 'Fresh Food';
+              const description = f.properties.description || '';
+              const distance1 = f.properties.distance_rutgers_1 || '';
+              const distance2 = f.properties.distance_rutgers_2 || '';
+              
+              let popupContent = `<strong>${name}</strong><br>Type: ${type}`;
+              if (description) popupContent += `<br>${description}`;
+              if (distance1) popupContent += `<br>Distance: ${distance1}`;
+              if (distance2) popupContent += `<br>${distance2}`;
+              const source = f.properties.source || '';
+              if (source) popupContent += `<br><small>Source: ${source}</small>`;
+              
               const m = L.circleMarker([lat, lon], { radius: 6, color: 'blue' })
-                .bindPopup(`<strong>${f.properties.name}</strong><br>${f.properties.address}`);
+                .bindPopup(popupContent);
               produceCluster.addLayer(m);
             });
             // Update heatmap
@@ -483,29 +496,31 @@ document.addEventListener('DOMContentLoaded', function() {
       if (fastFoodCluster) {
         fastFoodCluster.clearLayers();
         fastFoodHeat.setLatLngs([]);
-        // Re-fetch fast food data
-        fetch('https://overpass-api.de/api/interpreter', {
-          method: 'POST',
-          body: overpassQ
-        })
+        // Re-fetch fast food data from local GeoJSON
+        fetch('fast_food.geojson')
           .then(r => r.json())
-          .then(osm => {
-            const filtered = osm.elements.filter(el => {
-              const lat = el.lat || el.center.lat;
-              const lon = el.lon || el.center.lon;
+          .then(data => {
+            const filtered = data.features.filter(feature => {
+              const coords = feature.geometry.coordinates;
+              const lat = coords[1];
+              const lon = coords[0];
               return center.distanceTo([lat, lon]) <= radiusKm * 1000 && isInNewark(lat, lon);
             });
-            filtered.forEach(el => {
-              const lat = el.lat || el.center.lat;
-              const lon = el.lon || el.center.lon;
-              const name = el.tags.name || 'Fast Food';
-              const addr = [el.tags['addr:street'], el.tags['addr:housenumber'], el.tags['addr:city']].filter(Boolean).join(' ');
+            filtered.forEach(feature => {
+              const coords = feature.geometry.coordinates;
+              const lat = coords[1];
+              const lon = coords[0];
+              const name = feature.properties.name || 'Fast Food';
+              const type = feature.properties.type || 'Fast Food';
               const m = L.circleMarker([lat, lon], { radius: 6, color: 'red' })
-                .bindPopup(`<strong>${name}</strong><br>${addr}`);
+                .bindPopup(`<strong>${name}</strong><br>${type}`);
               fastFoodCluster.addLayer(m);
             });
             // Update heatmap
-            const ffHeatData = filtered.map(el => [el.lat || el.center.lat, el.lon || el.center.lon, 0.5]);
+            const ffHeatData = filtered.map(feature => {
+              const coords = feature.geometry.coordinates;
+              return [coords[1], coords[0], 0.5];
+            });
             fastFoodHeat.setLatLngs(ffHeatData);
           });
       }

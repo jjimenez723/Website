@@ -35,8 +35,8 @@ df['longitude'] = None
 
 print("Geocoding addresses...")
 for index, row in df.iterrows():
-    address = row['address']
-    print(f"Processing int(index + 1)/{len(df)}: {address}")
+    address = row['Address']
+    print(f"Processing {index + 1}/{len(df)}: {address}")
     
     lat, lon = geocode_address(address)
     df.at[index, 'latitude'] = lat
@@ -55,8 +55,8 @@ for _, row in df.iterrows():
         features.append({
             "type": "Feature",
             "properties": {
-                "name": row['name'],
-                "type": row['type']
+                "name": row['Name'],
+                "type": row['Category']
             },
             "geometry": {
                 "type": "Point",

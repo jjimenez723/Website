@@ -262,7 +262,7 @@ footer a {
 .toggle-label, .slider-label {
   display: flex;
   align-items: center;
-  gap: 0.6em;
+  gap: 0.8em;
   font-size: 1.1rem;
   font-weight: 500;
   color: #2563eb;
@@ -275,7 +275,7 @@ footer a {
   margin-right: 0.3em;
 }
 .slider-label input[type="range"] {
-  margin-left: 0.5em;
+  margin-left: 0.3em;
   width: 90px;
   accent-color: #38bdf8;
   /* Ensure full range is accessible */
@@ -797,10 +797,10 @@ button:active {
 #control-panel {
   background: #fff;
   box-shadow: 2px 0 12px 0 rgba(0,0,0,0.06);
-  width: 320px;
-  min-width: 220px;
+  width: 340px;
+  min-width: 240px;
   max-width: 95vw;
-  padding: 1.5rem 1rem 1.5rem 1rem;
+  padding: 1.5rem 1.2rem 1.5rem 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -825,7 +825,7 @@ button:active {
 #control-panel-toggle {
   position: fixed;
   top: 90px;
-  left: 320px;
+  left: 340px;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
@@ -933,12 +933,12 @@ input[type="text"], input[type="number"], select {
 }
 @media (max-width: 900px) {
   #control-panel {
-    width: 220px;
-    min-width: 120px;
-    padding: 1rem 0.5rem 1rem 0.5rem;
+    width: 240px;
+    min-width: 140px;
+    padding: 1rem 0.7rem 1rem 0.7rem;
   }
   #control-panel-toggle {
-    left: 220px;
+    left: 240px;
   }
   #control-panel.collapsed ~ #control-panel-toggle {
     left: 0;
@@ -1719,4 +1719,72 @@ footer a {
 #control-panel.collapsed ~ #showPanelBtn,
 #showPanelBtn.active {
   display: block !important;
+}
+
+/* Mission & Objectives blocks */
+.mission-block, .objectives-block {
+  background: #f1f5f9;
+  border-radius: 0.75rem;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 6px 0 rgba(1,89,65,0.06);
+  border-left: 5px solid #2563eb;
+}
+.mission-block h3, .objectives-block h3 {
+  color: #015941;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.objectives-block ul {
+  margin: 0 0 0.5rem 1.2rem;
+  padding: 0;
+  list-style: disc inside;
+}
+.program-dates {
+  background: #e0f2fe;
+  color: #004684;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+/* KPI List */
+.kpi-list {
+  margin: 1.2rem 0 0 1.2rem;
+  padding: 0;
+  list-style: square inside;
+  font-size: 1.08rem;
+}
+.kpi-list li {
+  margin-bottom: 0.7rem;
+  color: #374151;
+  background: #f9fafb;
+  border-radius: 0.4rem;
+  padding: 0.6rem 1rem;
+  box-shadow: 0 1px 4px 0 rgba(37,99,235,0.04);
+}
+.kpi-intro {
+  color: #015941;
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+  font-size: 1.08rem;
+}
+
+/* Vertical Farming List */
+.vertical-farming-list {
+  margin: 1.2rem 0 0 1.2rem;
+  padding: 0;
+  list-style: circle inside;
+  font-size: 1.08rem;
+}
+.vertical-farming-list li {
+  margin-bottom: 0.7rem;
+  color: #2563eb;
+  background: #f1f5f9;
+  border-radius: 0.4rem;
+  padding: 0.6rem 1rem;
+  box-shadow: 0 1px 4px 0 rgba(1,89,65,0.04);
 }

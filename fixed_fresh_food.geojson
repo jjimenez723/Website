@@ -1,0 +1,851 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2135991,
+          40.723341
+        ]
+      },
+      "properties": {
+        "name": "Eddy's supermarket On Clinton",
+        "type": "Fresh Food",
+        "description": "About 22 mins Via BUS",
+        "distance_rutgers_1": " About 13-15 mins DRIVING",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1735106,
+          40.75618589999999
+        ]
+      },
+      "properties": {
+        "name": "Food Plaza Supermarket\u00a0",
+        "type": "Fresh Food",
+        "description": "About 10 mins Via BUS",
+        "distance_rutgers_1": " About 5 mins DRIVING",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.21009049999999,
+          40.71294410000001
+        ]
+      },
+      "properties": {
+        "name": "Jr Freeway Deli Market",
+        "type": "Fresh Food",
+        "description": "About 25- 30 mins Via BUS",
+        "distance_rutgers_1": " About 15 mins DRIVING",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2076835,
+          40.7173743
+        ]
+      },
+      "properties": {
+        "name": "Hawthorne Grocery",
+        "type": "Fresh Food",
+        "description": "About 20-25 mins Via BUS",
+        "distance_rutgers_1": " About 13 -15 mins DRIVING\u00a0\u00a0",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.163294,
+          40.7796756
+        ]
+      },
+      "properties": {
+        "name": "Global Mini Market",
+        "type": "Fresh Food",
+        "description": "About 10- 15 min Via BUS About 5 mins DRIVING",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1926689,
+          40.7557406
+        ]
+      },
+      "properties": {
+        "name": "7th Ave. Grocery",
+        "type": "Fresh Food",
+        "description": "5 mins DRIVING",
+        "distance_rutgers_1": " 15 - 20 mins VIA BUS",
+        "distance_rutgers_2": " 25 mins WALKING",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1765008,
+          40.7602041
+        ]
+      },
+      "properties": {
+        "name": "Bloomfield Deli",
+        "type": "Fresh Food",
+        "description": "6 mins WALKING",
+        "distance_rutgers_1": " 12 mins BUS",
+        "distance_rutgers_2": " 25 mins WALKING",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.19809,
+          40.7519384
+        ]
+      },
+      "properties": {
+        "name": "JM grocery store & Deli",
+        "type": "Fresh Food",
+        "description": "10 mins DRIVING",
+        "distance_rutgers_1": " 17 - 20 mins via BUS",
+        "distance_rutgers_2": "\u00a0",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2112087,
+          40.73353349999999
+        ]
+      },
+      "properties": {
+        "name": "JNC Mini Market",
+        "type": "Fresh Food",
+        "description": "12 mins DRIVING",
+        "distance_rutgers_1": " 25 - 30 mins via BUS",
+        "distance_rutgers_2": "\u00a0",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2025407,
+          40.7355629
+        ]
+      },
+      "properties": {
+        "name": "Casey's Grocery",
+        "type": "Fresh Food",
+        "description": "8 mins DRIVING",
+        "distance_rutgers_1": " 13 mins via BUS\u00a0",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.17432509999999,
+          40.75120630000001
+        ]
+      },
+      "properties": {
+        "name": "F&D Supermarket",
+        "type": "Fresh Food",
+        "description": "2 mins DRIVING",
+        "distance_rutgers_1": " 10 mins WALKING\u00a0",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1741136,
+          40.7551615
+        ]
+      },
+      "properties": {
+        "name": "La Bodeguita Deli Grocery",
+        "type": "Fresh Food",
+        "description": "5 mins DRIVING",
+        "distance_rutgers_1": " 11 mins via BUS",
+        "distance_rutgers_2": " 18 mins WALKING\u00a0",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.19913729999999,
+          40.7347416
+        ]
+      },
+      "properties": {
+        "name": "De Sanchez Grocery Llc",
+        "type": "Fresh Food",
+        "description": "7 mins DRIVING",
+        "distance_rutgers_1": " 11 mins via BUS",
+        "distance_rutgers_2": " 30 mins WALKING",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2104478,
+          40.7355141
+        ]
+      },
+      "properties": {
+        "name": "D & A Deli Grocery",
+        "type": "Fresh Food",
+        "description": "10 mins DRIVING",
+        "distance_rutgers_1": " 18 mins via BUS",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1811757,
+          40.7485073
+        ]
+      },
+      "properties": {
+        "name": "El piloto deli & grocery",
+        "type": "Fresh Food",
+        "description": "3 mins DRIVING",
+        "distance_rutgers_1": " 10 mins via BUS",
+        "distance_rutgers_2": " 11 mins WALKING\u00a0",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2068654,
+          40.7098998
+        ]
+      },
+      "properties": {
+        "name": "New Stop 4 Food Market",
+        "type": "Fresh Food",
+        "description": "About 25- 30 mins Via BUS",
+        "distance_rutgers_1": " About 13 - 15 mins DRIVING\u00a0",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1822777,
+          40.7290155
+        ]
+      },
+      "properties": {
+        "name": "Shop Smart Food Market",
+        "type": "Fresh Food",
+        "description": "About 15 -20 mins Via BUS",
+        "distance_rutgers_1": " About 5 mins DRIVING",
+        "distance_rutgers_2": " About 20 min WALK\u00a0",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.20750389999999,
+          40.7271845
+        ]
+      },
+      "properties": {
+        "name": "Medina Meat Market",
+        "type": "Fresh Food",
+        "description": "12 mins DRIVING",
+        "distance_rutgers_1": " 25 mins via BUS",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.17920749999999,
+          40.7296026
+        ]
+      },
+      "properties": {
+        "name": "Washington food market",
+        "type": "Fresh Food",
+        "description": "5 mins DRIVING",
+        "distance_rutgers_1": " 10 - 15 mins",
+        "distance_rutgers_2": " 8 - 13 mins WALKING",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1781371,
+          40.7566432
+        ]
+      },
+      "properties": {
+        "name": "Park Avenue Deli and Food Market",
+        "type": "Fresh Food",
+        "description": "5 mins DRIVING",
+        "distance_rutgers_1": " 15 mins via BUS",
+        "distance_rutgers_2": " 23 mins WALKING\u00a0",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.17418909999999,
+          40.7416983
+        ]
+      },
+      "properties": {
+        "name": "Rutgers University",
+        "type": "Fresh Food",
+        "description": "",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1800639,
+          40.7246212
+        ]
+      },
+      "properties": {
+        "name": "Link Community Charter School",
+        "type": "Fresh Food",
+        "description": "",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1926872,
+          40.7387679
+        ]
+      },
+      "properties": {
+        "name": "Rodriguez Family Market",
+        "type": "Fresh Food",
+        "description": "5 mins DRIVING",
+        "distance_rutgers_1": " 17-20 mins via BUS",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1963839,
+          40.7391862
+        ]
+      },
+      "properties": {
+        "name": "We the best Food Market",
+        "type": "Fresh Food",
+        "description": "",
+        "distance_rutgers_1": " 6 mins DRIVING",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.20495489999999,
+          40.73977000000001
+        ]
+      },
+      "properties": {
+        "name": "R&R Grocery",
+        "type": "Fresh Food",
+        "description": "8 mins DRIVING",
+        "distance_rutgers_1": " 20 mins via BUS",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.20351029999999,
+          40.7314356
+        ]
+      },
+      "properties": {
+        "name": "New Mega Supermarket",
+        "type": "Fresh Food",
+        "description": "10 mins DRIVING",
+        "distance_rutgers_1": " 15 mins via BUS",
+        "distance_rutgers_2": "",
+        "source": "original"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1886385,
+          40.7340018
+        ]
+      },
+      "properties": {
+        "name": "Big Rocs Deli",
+        "type": "Deli",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1711971,
+          40.7408115
+        ]
+      },
+      "properties": {
+        "name": "Bragman's Delicatessen",
+        "type": "Deli",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1956807,
+          40.7550253
+        ]
+      },
+      "properties": {
+        "name": "Cooper's Liquors & Deli",
+        "type": "Deli",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.17438,
+          40.735156
+        ]
+      },
+      "properties": {
+        "name": "Hobby's Delicatessen & Restaurant",
+        "type": "Deli",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.177553,
+          40.723238
+        ]
+      },
+      "properties": {
+        "name": "Manny's Restaurant BBQ & Deli",
+        "type": "Deli",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.192051,
+          40.747242
+        ]
+      },
+      "properties": {
+        "name": "Manny's Deli & Restaurant II",
+        "type": "Deli",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1357024,
+          40.7322725
+        ]
+      },
+      "properties": {
+        "name": "Sahara Deli",
+        "type": "Deli",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.18353,
+          40.722837
+        ]
+      },
+      "properties": {
+        "name": "Bodega La Chiquita",
+        "type": "Bodega",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1631362,
+          40.7253355
+        ]
+      },
+      "properties": {
+        "name": "Casa d\u0092Paco",
+        "type": "Bodega",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1633092,
+          40.7324108
+        ]
+      },
+      "properties": {
+        "name": "Fornos of Spain Restaurant",
+        "type": "Bodega",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.162936,
+          40.775859
+        ]
+      },
+      "properties": {
+        "name": "La Bodega",
+        "type": "Bodega",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1880818,
+          40.7484019
+        ]
+      },
+      "properties": {
+        "name": "Food Depot Supermarket",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1588026,
+          40.7323708
+        ]
+      },
+      "properties": {
+        "name": "Golden Farm Market",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1725642,
+          40.735602
+        ]
+      },
+      "properties": {
+        "name": "Market Street Traders",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1770925,
+          40.7318538
+        ]
+      },
+      "properties": {
+        "name": "Nevada Supermarket",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1841829,
+          40.7439221
+        ]
+      },
+      "properties": {
+        "name": "Norfolk Food Mart",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1490474,
+          40.7271449
+        ]
+      },
+      "properties": {
+        "name": "Seabra Foods",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1861354,
+          40.7366808
+        ]
+      },
+      "properties": {
+        "name": "ShopRite of Newark",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1954481,
+          40.7173619
+        ]
+      },
+      "properties": {
+        "name": "The Lion Supermarket",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1701743,
+          40.7401408
+        ]
+      },
+      "properties": {
+        "name": "Whole Foods Market",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2011093,
+          40.7189488
+        ]
+      },
+      "properties": {
+        "name": "Bergen Supermarket",
+        "type": "Supermarket",
+        "description": "Fresh food location in Newark",
+        "distance_rutgers_1": "",
+        "distance_rutgers_2": "",
+        "source": "verified"
+      }
+    }
+  ]
+}
