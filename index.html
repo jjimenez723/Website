@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
   <header class="sticky-header">
     <nav>
       <ul class="menu">
         <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="./Map/map.html">Fast vs. Fresh Food Map</a></li>
         <li><a href="#kpis">Data Visualization</a></li>
         <li><a href="#team">Team</a></li>
@@ -27,11 +29,48 @@
   </header>
 
   <section class="hero">
+    <div id="particles-js"></div>
     <div class="hero-text">
       <h1>Rutgers Newark Bodega Project</h1>
       <p>Building a sustainable, data-informed, and hyperlocal food supply chain linking farms to bodegas.</p>
     </div>
   </section>
+
+  <!-- STORY SECTION -->
+  <section id="story" class="story">
+    <h2>Cultivating Change: The Story of Team Flow Chain</h2>
+
+    <p>In the bustling heart of Newark, a small yet determined group of students stood at the threshold of a challenge far greater than they had imagined. Tasked with building a local supply chain connecting community gardens and local farms to neighborhood bodegas, Team Flow Chain faced an intricate web of issues that demanded creativity, determination, and resilience.</p>
+
+    <p>The team, composed of diverse talents—Jensy Jimenez, Kevin Kim, Estrella Luna, Shanandra Ubiera, Michael la Torre, Riley O'Sullivan, and Yulissa Aguila—each brought their unique strengths to tackle a problem deeply entrenched within the community.</p>
+
+    <h3>Early Days and Hardships</h3>
+    <p>As the Lead Student Coordinator and Data Analytics Administrator, Jensy Jimenez immediately recognized the complexity of the challenge: transforming scattered community gardens and disconnected bodegas into a coherent, self-sustaining network. Jensy had a vision to use technology as a powerful tool, developing the Bodega Project Website, a digital hub that mapped out potential partners and resources.</p>
+    <p>Yet, reality soon tested the team's determination. During their initial visits, they encountered what felt like insurmountable barriers. Owners of bodegas were often absent, overwhelmed staff were too busy to engage meaningfully, and language barriers seemed to halt progress at every turn. Shanandra Ubiera, the team's Community Communications Lead and Translator, felt these challenges personally. She realized quickly that bridging this gap required far more than translation—it required building genuine relationships and trust.</p>
+    <p>Meanwhile, Kevin Kim, serving as Bodega Supply Chain Specialist, observed logistical inefficiencies that severely limited the availability of fresh produce. Small farms struggled to meet the demand, many urban gardens lay abandoned, and even operational farms lacked the capacity or infrastructure for large-scale production. His initial optimism was tempered by the harsh reality of the situation.</p>
+    <p>Estrella Luna, a committed Plant Biology Expert and Data Collection Specialist, faced the daunting task of assessing the viability of urban plots. Too often, she found community gardens overtaken by weeds, abandoned, or simply replaced by apartment complexes. For Estrella, it felt as though each discovery created more questions than answers.</p>
+    <p>The challenges also extended into the sphere of business and outreach. Michael la Torre, as the team's Community Outreach and Business Development Coordinator, recognized quickly that many bodega owners lacked the resources or interest in tracking key performance indicators (KPIs). Without this crucial data, proving the project's viability and sustainability was difficult.</p>
+
+    <h3>Turning Points and Innovative Solutions</h3>
+    <p>Facing these hardships head-on, Team Flow Chain decided to regroup, strategize, and pivot their approach. With guidance from Rutgers Newark and Bergen Community College, the team started implementing innovative, practical solutions.</p>
+    <p>Jensy Jimenez leveraged his data analytics background, creating interactive dashboards and website features that allowed the team to visualize potential partnerships clearly. This platform became instrumental in connecting farms with bodegas and identifying critical logistic gaps in real-time.</p>
+    <p>Shanandra Ubiera initiated community engagement workshops. Her dedication in creating culturally inclusive, bilingual events allowed bodegas and community gardeners to build connections in meaningful, personal ways. She fostered trust and made space for honest dialogue, which gradually transformed hesitance into active participation.</p>
+    <p>To address the issue of limited local production, Estrella Luna pioneered a research-based approach. She worked closely with community members to revive abandoned gardens, promoting practices like hydroponics and vertical farming—methods she learned during the team's visit to innovative agricultural projects. Her data-driven guidance significantly improved crop yields, making local sourcing realistic for nearby bodegas.</p>
+    <p>Kevin Kim began introducing supply chain solutions inspired by larger-scale practices. He optimized inventory management and distribution routes, offering insights into improving lead times and reducing spoilage. His expertise proved invaluable as small bodegas saw improvements in efficiency and product freshness.</p>
+    <p>Michael la Torre intensified his outreach, providing owners with easy-to-use tracking sheets and organizing educational sessions on the importance of KPIs. Slowly but surely, bodegas began to see the value of data-driven insights for their daily operations, leading to better business decisions and profitability.</p>
+    <p>Riley O'Sullivan, the Marketing Specialist and Social Media Ambassador, amplified these successes. He designed vibrant campaigns highlighting participating bodegas, community gardens, and events across social media. His efforts raised community awareness and drove more traffic to participating locations.</p>
+    <p>Behind the scenes, Yulissa Aguila, the team's talented Computer Science Administrator and Social Media Manager, ensured seamless digital communication and tech support. Her role allowed the project's digital presence to flourish, enabling real-time updates and engagement, keeping stakeholders consistently informed and connected.</p>
+
+    <h3>A Vision for the Future</h3>
+    <p>Team Flow Chain learned firsthand that real change requires tenacity, adaptability, and a genuine connection with the community. Their struggles became catalysts for innovative thinking and collaboration, ultimately laying a strong foundation for a sustainable local supply chain.</p>
+    <p>Their journey is ongoing. Team Flow Chain now sets its sights on expanding the Newark model beyond the city's borders—potentially bringing fresh produce solutions to Bergen County bodegas and beyond. Their next steps include deeper integration of Newark's "Adopt-a-Lot" program, expanding vertical farming within urban settings, and continuing to educate local youth about food sustainability, ensuring the project's legacy endures for future generations.</p>
+    <p>Together, Jensy, Kevin, Estrella, Shanandra, Michael, Riley, and Yulissa exemplify the spirit of innovation and resilience. Their story serves as a testament to the power of teamwork, community engagement, and the unyielding belief in creating a better, healthier future—one bodega, one garden, and one community at a time.</p>
+
+    <p class="story-tagline"><em>One bodega, one garden, one community at a time.</em></p>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <!-- (Gallery section removed; now on gallery.html) -->
 
   <section id="about" class="content-section">
     <h2>About the Project</h2>
@@ -72,16 +111,176 @@
   <section id="team" class="content-section">
     <h2>Meet Team Flow Chain</h2>
     <div class="team-grid">
-      <div class="team-card"><img src="images/edward.jpg" alt="Edward Sanchez"><h3>Dr. Edward Sanchez</h3><p>Program Director</p></div>
-      <div class="team-card"><img src="images/kevin.jpg" alt="Kevin Kim"><h3>Kevin Kim</h3><p>Student Coordinator</p></div>
-      <div class="team-card"><img src="images/jensy.jpg" alt="Jensy Jimenez"><h3>Jensy Jimenez</h3><p>Lead Student Coordinator</p></div>
-      <div class="team-card"><img src="images/michael.jpg" alt="Michael La Torre"><h3>Michael La Torre</h3><p>Student</p></div>
-      <div class="team-card"><img src="images/estrella.jpg" alt="Estrella Luna"><h3>Estrella Luna</h3><p>Student</p></div>
-      <div class="team-card"><img src="images/hansel.jpg" alt="Hansel Asmar"><h3>Hansel Asmar</h3><p>Student</p></div>
-      <div class="team-card"><img src="images/esteban.jpg" alt="Esteban Martinez"><h3>Esteban Martinez</h3><p>Student</p></div>
-      <div class="team-card"><img src="images/riley.jpg" alt="Riley O’Sullivan"><h3>Riley O’Sullivan</h3><p>Student</p></div>
-      <div class="team-card"><img src="images/shanandra.jpg" alt="Shanandra Ubiera"><h3>Shanandra Ubiera</h3><p>Student</p></div>
-      <div class="team-card"><img src="images/Yulissa.jpg" alt="Yulissa Guila"><h3>Yulissa Aguila</h3><p>Media Specialist</p></div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/edward.jpg" alt="Edward Sanchez">
+            <h3>Dr. Edward Sanchez</h3>
+            <p>Program Director</p>
+          </div>
+          <div class="card-back">
+            <h3>Dr. Edward Sanchez</h3>
+            <p class="bio">Leading the Rutgers Newark Bodega Project with expertise in sustainable food systems and community development.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/kevin.jpg" alt="Kevin Kim">
+            <h3>Kevin Kim</h3>
+            <p>Bodega Supply Chain Specialist</p>
+          </div>
+          <div class="card-back">
+            <h3>Kevin Kim</h3>
+            <p class="bio">Optimizing supply chain logistics and inventory management to connect local farms with neighborhood bodegas.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/jensy.jpg" alt="Jensy Jimenez">
+            <h3>Jensy Jimenez</h3>
+            <p>Lead Student Coordinator & Data Analytics Administrator</p>
+          </div>
+          <div class="card-back">
+            <h3>Jensy Jimenez</h3>
+            <p class="bio">Developing digital solutions and data-driven insights to visualize and optimize the local food supply chain network.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/michael.jpg" alt="Michael La Torre">
+            <h3>Michael La Torre</h3>
+            <p>Community Outreach & Business Development Coordinator</p>
+          </div>
+          <div class="card-back">
+            <h3>Michael La Torre</h3>
+            <p class="bio">Building relationships with bodega owners and implementing KPI tracking systems for sustainable business growth.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/estrella.jpg" alt="Estrella Luna">
+            <h3>Estrella Luna</h3>
+            <p>Plant Biology Expert & Data Collection Specialist</p>
+          </div>
+          <div class="card-back">
+            <h3>Estrella Luna</h3>
+            <p class="bio">Reviving urban gardens and promoting sustainable farming practices through research-based approaches.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/hansel.jpg" alt="Hansel Asmar">
+            <h3>Hansel Asmar</h3>
+            <p>Student</p>
+          </div>
+          <div class="card-back">
+            <h3>Hansel Asmar</h3>
+            <p class="bio">Contributing to the project's success through research and community engagement initiatives.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/esteban.jpg" alt="Esteban Martinez">
+            <h3>Esteban Martinez</h3>
+            <p>Student</p>
+          </div>
+          <div class="card-back">
+            <h3>Esteban Martinez</h3>
+            <p class="bio">Supporting the team's mission through data analysis and community outreach efforts.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/riley.jpg" alt="Riley O'Sullivan">
+            <h3>Riley O'Sullivan</h3>
+            <p>Marketing Specialist & Social Media Ambassador</p>
+          </div>
+          <div class="card-back">
+            <h3>Riley O'Sullivan</h3>
+            <p class="bio">Creating vibrant marketing campaigns and amplifying project successes across social media platforms.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/shanandra.jpg" alt="Shanandra Ubiera">
+            <h3>Shanandra Ubiera</h3>
+            <p>Community Communications Lead & Translator</p>
+          </div>
+          <div class="card-back">
+            <h3>Shanandra Ubiera</h3>
+            <p class="bio">Bridging cultural and language barriers through community engagement workshops and trust-building initiatives.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="images/Yulissa.jpg" alt="Yulissa Aguila">
+            <h3>Yulissa Aguila</h3>
+            <p>Computer Science Administrator & Social Media Manager</p>
+          </div>
+          <div class="card-back">
+            <h3>Yulissa Aguila</h3>
+            <p class="bio">Ensuring seamless digital communication and providing technical support for the project's online presence.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -106,12 +305,121 @@
   </footer>
 
   <script>
+    // Particle.js configuration
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 80,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: '#ffffff'
+        },
+        shape: {
+          type: 'circle'
+        },
+        opacity: {
+          value: 0.3,
+          random: false
+        },
+        size: {
+          value: 3,
+          random: true
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#ffffff',
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out',
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'repulse'
+          },
+          onclick: {
+            enable: true,
+            mode: 'push'
+          },
+          resize: true
+        }
+      },
+      retina_detect: true
+    });
+
+    // Enhanced ScrollReveal animations
+    ScrollReveal().reveal('.story', {
+      distance: '50px',
+      duration: 1000,
+      easing: 'ease-out',
+      origin: 'bottom',
+      delay: 200
+    });
+
+    ScrollReveal().reveal('.story h2', {
+      distance: '30px',
+      duration: 800,
+      easing: 'ease-out',
+      origin: 'top',
+      delay: 400
+    });
+
+    ScrollReveal().reveal('.story h3', {
+      distance: '30px',
+      duration: 800,
+      easing: 'ease-out',
+      origin: 'left',
+      delay: 200
+    });
+
+    ScrollReveal().reveal('.story p', {
+      distance: '20px',
+      duration: 600,
+      easing: 'ease-out',
+      origin: 'bottom',
+      delay: 100,
+      interval: 100
+    });
+
+    ScrollReveal().reveal('.story-tagline', {
+      distance: '30px',
+      duration: 800,
+      easing: 'ease-out',
+      origin: 'bottom',
+      delay: 600
+    });
+
     ScrollReveal().reveal('.content-section', {
       distance: '50px',
       duration: 800,
       easing: 'ease-out',
       origin: 'bottom',
       interval: 100
+    });
+
+    ScrollReveal().reveal('.team-card', {
+      distance: '30px',
+      duration: 600,
+      easing: 'ease-out',
+      origin: 'bottom',
+      delay: 200,
+      interval: 150
     });
   </script>
 

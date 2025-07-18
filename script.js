@@ -3,6 +3,79 @@ let produceHeat, fastFoodHeat, produceCluster, fastFoodCluster;
 let produceHeatDataOriginal = [], fastFoodHeatDataOriginal = [];
 
 document.addEventListener('DOMContentLoaded', function() {
+  const controlPanel = document.getElementById('control-panel');
+  const compactBtn = document.getElementById('compactPanelBtn');
+  const minimizeBtn = document.getElementById('minimizePanelBtn');
+  const restoreBtn = document.getElementById('restorePanelBtn');
+  const showPanelBtn = document.getElementById('showPanelBtn');
+  let wasCompact = false;
+  if (compactBtn && controlPanel) {
+    compactBtn.addEventListener('click', function() {
+      if (controlPanel.classList.contains('collapsed')) return; // Don't shrink if minimized
+      controlPanel.classList.toggle('compact');
+      // Toggle icon
+      const icon = compactBtn.querySelector('i');
+      if (controlPanel.classList.contains('compact')) {
+        icon.classList.remove('fa-compress-alt');
+        icon.classList.add('fa-expand-alt');
+      } else {
+        icon.classList.remove('fa-expand-alt');
+        icon.classList.add('fa-compress-alt');
+      }
+      setTimeout(function() {
+        if (window.map && typeof window.map.invalidateSize === 'function') {
+          window.map.invalidateSize();
+        }
+      }, 350);
+    });
+  }
+  if (minimizeBtn && controlPanel) {
+    minimizeBtn.addEventListener('click', function() {
+      if (controlPanel.classList.contains('collapsed')) return;
+      wasCompact = controlPanel.classList.contains('compact');
+      controlPanel.classList.add('collapsed');
+      controlPanel.classList.remove('compact');
+      setTimeout(function() {
+        if (window.map && typeof window.map.invalidateSize === 'function') {
+          window.map.invalidateSize();
+        }
+      }, 350);
+    });
+  }
+  if (restoreBtn && controlPanel) {
+    restoreBtn.addEventListener('click', function() {
+      controlPanel.classList.remove('collapsed');
+      if (wasCompact) controlPanel.classList.add('compact');
+      setTimeout(function() {
+        if (window.map && typeof window.map.invalidateSize === 'function') {
+          window.map.invalidateSize();
+        }
+      }, 350);
+    });
+  }
+  if (showPanelBtn && controlPanel) {
+    showPanelBtn.addEventListener('click', function() {
+      controlPanel.classList.remove('collapsed');
+      if (wasCompact) controlPanel.classList.add('compact');
+      setTimeout(function() {
+        if (window.map && typeof window.map.invalidateSize === 'function') {
+          window.map.invalidateSize();
+        }
+      }, 350);
+    });
+  }
+  // Also update showPanelBtn on load and on any panel state change
+  function updateShowPanelBtn() {
+    if (!controlPanel || !showPanelBtn) return;
+    if (controlPanel.classList.contains('collapsed')) {
+      showPanelBtn.style.display = 'block';
+    } else {
+      showPanelBtn.style.display = 'none';
+    }
+  }
+  updateShowPanelBtn();
+  const observer = new MutationObserver(updateShowPanelBtn);
+  if (controlPanel) observer.observe(controlPanel, { attributes: true, attributeFilter: ['class'] });
   if (typeof L !== 'undefined' && document.getElementById('map')) {
     // Define bounds for Newark area
     const newarkBounds = L.latLngBounds(
@@ -144,9 +217,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // clusters
         produceCluster = L.markerClusterGroup({ chunkedLoading: true });
+        
+        // Create custom icon for fresh food
+        const freshFoodIcon = L.divIcon({
+          html: '<i class="fas fa-apple-alt fresh-food-icon" style="font-size: 24px;"></i>',
+          className: 'custom-div-icon',
+          iconSize: [24, 24],
+          iconAnchor: [12, 12]
+        });
+        
         data.features.forEach(f => {
           const [lon, lat] = f.geometry.coordinates;
-          const m = L.circleMarker([lat, lon], { radius: 6, color: 'blue' })
+          const m = L.marker([lat, lon], { icon: freshFoodIcon })
             .bindPopup(`<strong>${f.properties.name}</strong><br>${f.properties.address}
                         <br><a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}"
                            target="_blank">Directions</a>`);
@@ -174,6 +256,15 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(osm => {
         fastFoodHeatDataOriginal = [];
         fastFoodCluster = L.markerClusterGroup({ chunkedLoading: true });
+        
+        // Create custom icon for fast food
+        const fastFoodIcon = L.divIcon({
+          html: '<i class="fas fa-hamburger fast-food-icon" style="font-size: 24px;"></i>',
+          className: 'custom-div-icon',
+          iconSize: [24, 24],
+          iconAnchor: [12, 12]
+        });
+        
         osm.elements.forEach(el => {
           const lat = el.lat || el.center.lat;
           const lon = el.lon || el.center.lon;
@@ -181,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const name = el.tags.name || 'Fast Food';
           const addr = [el.tags['addr:street'], el.tags['addr:housenumber'], el.tags['addr:city']]
             .filter(Boolean).join(' ');
-          const m = L.circleMarker([lat, lon], { radius: 6, color: 'red' })
+          const m = L.marker([lat, lon], { icon: fastFoodIcon })
             .bindPopup(`<strong>${name}</strong><br>${addr}
                         <br><a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}"
                            target="_blank">Directions</a>`);
@@ -246,8 +337,8 @@ document.addEventListener('DOMContentLoaded', function() {
     legendControl.onAdd = function(map) {
       const div = L.DomUtil.create('div', 'map-legend');
       div.innerHTML = `
-        <div><span class="legend-color" style="background:#2563eb"></span> Fresh Food (marker/heat)</div>
-        <div><span class="legend-color" style="background:#e11d48"></span> Fast Food (marker/heat)</div>
+        <div><i class="fas fa-apple-alt fresh-food-icon" style="font-size: 18px; margin-right: 8px;"></i> Fresh Food (marker/heat)</div>
+        <div><i class="fas fa-hamburger fast-food-icon" style="font-size: 18px; margin-right: 8px;"></i> Fast Food (marker/heat)</div>
         <div><span class="legend-line" style="border-color:#008000"></span> Newark boundary</div>
         <div><span class="legend-circle"></span> Filter radius</div>
         <div><span class="legend-cluster"></span> Cluster: Multiple locations</div>
@@ -575,29 +666,15 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Print button element:', printBtn);
 
     // Control panel toggle logic
-    const controlPanel = document.getElementById('control-panel');
-    const controlPanelToggle = document.getElementById('control-panel-toggle');
-    if (controlPanel && controlPanelToggle) {
-      controlPanelToggle.onclick = () => {
-        controlPanel.classList.toggle('collapsed');
-        // Move the toggle button to the correct side if needed
-        // (No DOM move needed if using adjacent sibling selector in CSS)
-        if (typeof map !== 'undefined') {
-          setTimeout(() => map.invalidateSize(), 350);
+    const controlPanelToggle = document.getElementById('controlPanelToggle');
+    if (controlPanelToggle) {
+      controlPanelToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          controlPanelToggle.click();
         }
-      };
+      });
     }
-    // Optionally collapse by default on mobile
-    if (window.innerWidth < 700) {
-      controlPanel.classList.add('collapsed');
-    }
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 700) {
-        controlPanel.classList.add('collapsed');
-      } else {
-        controlPanel.classList.remove('collapsed');
-      }
-    });
 
     // Update the sizeSlider min/max for heatmap marker size
     const sizeSlider = document.getElementById('sizeSlider');
@@ -767,15 +844,6 @@ document.addEventListener('DOMContentLoaded', function() {
           }, 400);
         }, 200);
       };
-    }
-    // Keyboard accessibility for panel toggle
-    if (controlPanelToggle) {
-      controlPanelToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          controlPanelToggle.click();
-        }
-      });
     }
   }
 });
