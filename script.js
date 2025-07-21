@@ -3,6 +3,63 @@ let produceHeat, fastFoodHeat, produceCluster, fastFoodCluster;
 let produceHeatDataOriginal = [], fastFoodHeatDataOriginal = [];
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Hamburger menu logic
+  const hamburger = document.getElementById('hamburger-menu');
+  const menu = document.querySelector('nav .menu');
+  if (hamburger && menu) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      menu.classList.toggle('open');
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !expanded);
+    });
+    // Close menu on link click (mobile UX)
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 900) {
+          hamburger.classList.remove('active');
+          menu.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
+
+  // Carousel logic
+  const carousel = document.getElementById('image-carousel');
+  if (carousel) {
+    const track = carousel.querySelector('.carousel-track');
+    const images = Array.from(track.children);
+    const prevBtn = carousel.querySelector('.carousel-btn.prev');
+    const nextBtn = carousel.querySelector('.carousel-btn.next');
+    let currentIndex = 0;
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateCarousel();
+    }
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateCarousel();
+    }
+    prevBtn.addEventListener('click', showPrev);
+    nextBtn.addEventListener('click', showNext);
+    // Optional: swipe support for mobile
+    let startX = null;
+    track.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    });
+    track.addEventListener('touchend', e => {
+      if (startX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      if (endX - startX > 50) showPrev();
+      else if (startX - endX > 50) showNext();
+      startX = null;
+    });
+    updateCarousel();
+  }
   const controlPanel = document.getElementById('control-panel');
   const compactBtn = document.getElementById('compactPanelBtn');
   const minimizeBtn = document.getElementById('minimizePanelBtn');
