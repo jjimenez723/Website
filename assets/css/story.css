@@ -29,6 +29,7 @@ body::-webkit-scrollbar {
 /* Offset main content to account for fixed header height */
 main {
   padding-top: 6rem;
+  padding-bottom: clamp(4rem, 10vw, 8rem);
 }
 
 /* Hide old vertical timeline */
@@ -99,6 +100,11 @@ main {
 .visible {
   opacity: 1;
   transform: none;
+}
+
+/* Extra bottom space for the final chapter */
+.chapter:last-child {
+  margin-bottom: clamp(8rem, 20vw, 12rem);
 }
 
 @media (min-width: 769px) {
