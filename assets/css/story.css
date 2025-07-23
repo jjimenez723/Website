@@ -66,10 +66,12 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: clamp(4rem, 10vw, 8rem) 0;
 }
 
 .chapter-media {
-  flex: 1;
+  /* Limit image width responsively */
+  flex: 0 0 clamp(150px, 25vw, 300px);
   padding: 0 1rem;
 }
 
