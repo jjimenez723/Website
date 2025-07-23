@@ -304,8 +304,8 @@
   const roleCols = {
     Farm: ['Produce','Category','Farm Cost $/lb','Farm Markup %','Farm Sale $/lb',
            'Farm Shrink %','Farm GP $/lb','Farm GM %','Qty lbs'],
-    Distributor:['Produce','Category','Farm Sale $/lb','Dist. Handling $/lb','Dist. Margin %',
-                 'Dist. Sale $/lb','Dist. Shrink %','Dist. GP $/lb','Dist. GM %','Qty lbs'],
+    Distributor:['Produce','Category','Farm Sale $/lb','Dist Handling $/lb','Dist Margin %',
+                 'Dist Sale $/lb','Dist Shrink %','Dist GP $/lb','Dist GM %','Qty lbs'],
     Bodega: ['Produce','Category','Dist. Sale $/lb','Retail Handling $/lb','Retail Margin %',
              'Retail Price $/lb','Bodega Shrink %','Bodega GP $/lb','Bodega GM %','Qty lbs']
   };
@@ -331,14 +331,14 @@
     Object.keys(d).forEach(k=>{ if(d[k]==='') d[k]=0; d[k]=Number(d[k]) || d[k]; });
 
     d['Farm Sale $/lb']    = d['Farm Cost $/lb'] * (1 + d['Farm Markup %']/100);
-    d['Dist. Sale $/lb']   = (d['Farm Sale $/lb'] + d['Dist. Handling $/lb']) * (1 + d['Dist. Margin %']/100);
-    d['Retail Price $/lb'] = (d['Dist. Sale $/lb'] + d['Retail Handling $/lb']) * (1 + d['Retail Margin %']/100);
+    d['Dist Sale $/lb']   = (d['Farm Sale $/lb'] + d['Dist Handling $/lb']) * (1 + d['Dist Margin %']/100);
+    d['Retail Price $/lb'] = (d['Dist Sale $/lb'] + d['Retail Handling $/lb']) * (1 + d['Retail Margin %']/100);
 
     d['Farm GP $/lb']      = d['Farm Sale $/lb'] - d['Farm Cost $/lb'];
     d['Farm GM %']         = d['Farm Sale $/lb'] ? 100*d['Farm GP $/lb']/d['Farm Sale $/lb'] : 0;
-    d['Dist. GP $/lb']     = d['Dist. Sale $/lb'] - d['Farm Sale $/lb'] - d['Dist. Handling $/lb'];
-    d['Dist. GM %']        = d['Dist. Sale $/lb'] ? 100*d['Dist. GP $/lb']/d['Dist. Sale $/lb'] : 0;
-    d['Bodega GP $/lb']    = (d['Retail Price $/lb']*(1 - d['Bodega Shrink %']/100)) - d['Dist. Sale $/lb'] - d['Retail Handling $/lb'];
+    d['Dist GP $/lb']     = d['Dist Sale $/lb'] - d['Farm Sale $/lb'] - d['Dist Handling $/lb'];
+    d['Dist GM %']        = d['Dist Sale $/lb'] ? 100*d['Dist GP $/lb']/d['Dist Sale $/lb'] : 0;
+    d['Bodega GP $/lb']    = (d['Retail Price $/lb']*(1 - d['Bodega Shrink %']/100)) - d['Dist Sale $/lb'] - d['Retail Handling $/lb'];
     d['Bodega GM %']       = d['Retail Price $/lb'] ? 100*d['Bodega GP $/lb']/d['Retail Price $/lb'] : 0;
   }
 
@@ -348,18 +348,23 @@
     Object.keys(d).forEach(k=>{ if(d[k]==='') d[k]=0; d[k]=Number(d[k]) || d[k]; });
 
     d['Farm Sale $/lb']    = d['Farm Cost $/lb'] * (1 + d['Farm Markup %']/100);
-    d['Dist. Sale $/lb']   = (d['Farm Sale $/lb'] + d['Dist. Handling $/lb']) * (1 + d['Dist. Margin %']/100);
-    d['Retail Price $/lb'] = (d['Dist. Sale $/lb'] + d['Retail Handling $/lb']) * (1 + d['Retail Margin %']/100);
+    d['Dist Sale $/lb']   = (d['Farm Sale $/lb'] + d['Dist Handling $/lb']) * (1 + d['Dist Margin %']/100);
+    d['Retail Price $/lb'] = (d['Dist Sale $/lb'] + d['Retail Handling $/lb']) * (1 + d['Retail Margin %']/100);
 
     d['Farm GP $/lb']      = d['Farm Sale $/lb'] - d['Farm Cost $/lb'];
     d['Farm GM %']         = d['Farm Sale $/lb'] ? 100*d['Farm GP $/lb']/d['Farm Sale $/lb'] : 0;
-    d['Dist. GP $/lb']     = d['Dist. Sale $/lb'] - d['Farm Sale $/lb'] - d['Dist. Handling $/lb'];
-    d['Dist. GM %']        = d['Dist. Sale $/lb'] ? 100*d['Dist. GP $/lb']/d['Dist. Sale $/lb'] : 0;
-    d['Bodega GP $/lb']    = (d['Retail Price $/lb']*(1 - d['Bodega Shrink %']/100)) - d['Dist. Sale $/lb'] - d['Retail Handling $/lb'];
+    d['Dist GP $/lb']     = d['Dist Sale $/lb'] - d['Farm Sale $/lb'] - d['Dist Handling $/lb'];
+    d['Dist GM %']        = d['Dist Sale $/lb'] ? 100*d['Dist GP $/lb']/d['Dist Sale $/lb'] : 0;
+    d['Bodega GP $/lb']    = (d['Retail Price $/lb']*(1 - d['Bodega Shrink %']/100)) - d['Dist Sale $/lb'] - d['Retail Handling $/lb'];
     d['Bodega GM %']       = d['Retail Price $/lb'] ? 100*d['Bodega GP $/lb']/d['Retail Price $/lb'] : 0;
   }
 
   function recalcTotals(role){
+    console.log('TOT-DEBUG', role);
+    if (role === 'Distributor') {
+  console.table(hot.getSourceData().slice(0,3),
+                ['Produce','Dist. Sale $/lb','Dist. GP $/lb','Qty lbs']);
+}
     const data = hot.getSourceData();
     let rev=0, gp=0, qty=0;
     data.forEach(d=>{
@@ -371,8 +376,8 @@
         rev += num(d['Farm Sale $/lb'])*q;
         gp  += num(d['Farm GP $/lb'])*q;
       } else if(role==='Distributor'){
-        rev += num(d['Dist. Sale $/lb'])*q;
-        gp  += num(d['Dist. GP $/lb'])*q;
+        rev += num(d['Dist Sale $/lb'])*q;
+        gp  += num(d['Dist GP $/lb'])*q;
       } else if(role==='Bodega'){
         rev += num(d['Retail Price $/lb'])*(1-num(d['Bodega Shrink %'])/100)*q;
         gp  += num(d['Bodega GP $/lb'])*q;
@@ -410,6 +415,8 @@
     currentRole = role;
     document.getElementById('totalsCard').classList.remove('d-none');
     applyVisibility();
+    // recompute every row so distributor columns are filled
+    hot.getSourceData().forEach((_,idx)=>recalcRow(idx));
     recalcTotals(role);
   }
   function buildColumnDefs(){
@@ -458,6 +465,13 @@
   Papa.parse('Supply_Chain_KPI_Builder.csv',{
     download:true,header:true,dynamicTyping:true,complete:(res)=>{
       hotData=res.data.filter(r=>r.Produce);
+      // Normalize distributor keys (remove dot after Dist) to avoid nested path issues
+      hotData.forEach(r=>{
+        if('Dist. Sale $/lb' in r){ r['Dist Sale $/lb']=r['Dist. Sale $/lb']; delete r['Dist. Sale $/lb']; }
+        if('Dist. Margin %' in r){ r['Dist Margin %']=r['Dist. Margin %']; delete r['Dist. Margin %']; }
+        if('Dist. Handling $/lb' in r){ r['Dist Handling $/lb']=r['Dist. Handling $/lb']; delete r['Dist. Handling $/lb']; }
+        if('Dist. Shrink %' in r){ r['Dist Shrink %']=r['Dist. Shrink %']; delete r['Dist. Shrink %']; }
+      });
       hotData.forEach(computeRowObj); // compute before Handsontable exists
       colHeaders=Object.keys(hotData[0]);
       const container=document.getElementById('hot');
