@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rutgers Newark Bodega Project</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/nav-mobile.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -12,7 +13,7 @@
 <body>
   <header class="sticky-header">
     <nav>
-      <button class="hamburger" id="hamburger-menu" aria-label="Open menu" aria-expanded="false">
+      <button class="hamburger" id="navToggle" aria-label="Open navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="menu">
@@ -425,6 +426,17 @@
     });
   </script>
 
+  <nav id="mobileNav" class="offcanvas" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="story.html">Story</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="./Map/map.html">Fast vs. Fresh Food Map</a>
+    <a href="kpi-builder.html">KPI Builder</a>
+    <a href="#kpis">Data Visualization</a>
+    <a href="#team">Team</a>
+  </nav>
+  <div id="navOverlay" class="overlay" hidden></div>
+  <script src="assets/js/nav-mobile.js" defer></script>
   <script src="script.js"></script>
 
 </body>

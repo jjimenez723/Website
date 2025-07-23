@@ -1,0 +1,97 @@
+/* nav-mobile.css – mobile off-canvas navigation styles */
+:root {
+  --brand-red: #C42D4D;
+  --hamburger-size: 40px;
+  --panel-width: 70vw;
+  --panel-max: 320px;
+  --link-fs: 1.25rem;
+}
+
+/* Hamburger button */
+.hamburger {
+  position: fixed;
+  top: 0.25rem; /* align bottom edge with header bars */
+  right: 0.5rem; /* tuck closer to right edge */
+  width: var(--hamburger-size);
+  height: var(--hamburger-size);
+  border-radius: 6px;
+  background: var(--brand-red);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 2001;
+}
+.hamburger span {
+  width: 60%;
+  height: 3px;
+  background: #000;
+  margin: 0 auto;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+/* X icon animation */
+.hamburger.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.is-open span:nth-child(2) { opacity: 0; }
+.hamburger.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* Off-canvas panel */
+.offcanvas {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: var(--panel-width);
+  max-width: var(--panel-max);
+  background: var(--brand-red);
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+  padding-top: 4.5rem; /* space for header */
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+}
+.offcanvas a {
+  color: #fff;
+  text-decoration: none;
+  font-size: var(--link-fs);
+  line-height: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+}
+.offcanvas.is-open { transform: translateX(0); }
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 1999;
+}
+.overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Hide legacy horizontal menu on mobile */
+.menu { display: none !important; }
+
+@media (min-width: 768px) {
+  /* restore desktop horizontal menu */
+  .menu { display: flex !important; }
+}
+
+/* Desktop – restore original nav */
+@media (min-width: 768px) {
+  .hamburger,
+  .offcanvas,
+  .overlay { display: none !important; }
+} 
