@@ -2,7 +2,7 @@
 // Runs after DOMContentLoaded
 
 document.addEventListener('DOMContentLoaded', () => {
-  const btn   = document.getElementById('navToggle');
+  const btn   = document.querySelector('.hamburger');
   const panel = document.getElementById('mobileNav');
   const ovly  = document.getElementById('navOverlay');
 
@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const focusSelector = 'a, button';
   let focusEls = [];
 
-  let isOpen = false; // state flag
+  const isOpen = () => btn.classList.contains('is-open');
 
   const openMenu = () => {
-    if (isOpen) return;
+    if (isOpen()) return;
     panel.classList.add('is-open');
     ovly.classList.add('is-open');
     ovly.hidden = false;
@@ -25,11 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     focusEls[0]?.focus();
     // lock background scroll
     document.body.style.overflow = 'hidden';
-    isOpen = true;
   };
 
   const closeMenu = () => {
-    if (!isOpen) return;
+    if (!isOpen()) return;
     panel.classList.remove('is-open');
     ovly.classList.remove('is-open');
     setTimeout(() => { ovly.hidden = true; }, 350); // wait for fade
@@ -37,12 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.setAttribute('aria-expanded', 'false');
     btn.focus();
     document.body.style.overflow = '';
-    isOpen = false;
   };
 
   // click toggle
   btn.addEventListener('click', () => {
-    isOpen ? closeMenu() : openMenu();
+    isOpen() ? closeMenu() : openMenu();
   });
 
   // click overlay to close

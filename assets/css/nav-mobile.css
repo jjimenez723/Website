@@ -7,11 +7,13 @@
   --link-fs: 1.25rem;
 }
 
+html,body{ overflow-x:hidden; }
+
 /* Hamburger button */
 .hamburger {
   position: fixed;
   top: 0.25rem; /* align bottom edge with header bars */
-  right: 0.5rem; /* tuck closer to right edge */
+  right: 1rem; /* additional shift left */
   width: var(--hamburger-size);
   height: var(--hamburger-size);
   border-radius: 6px;
@@ -23,7 +25,6 @@
   gap: 5px;
   cursor: pointer;
   z-index: 3000;
-  pointer-events: auto;
 }
 .hamburger span {
   width: 60%;
@@ -37,6 +38,9 @@
 .hamburger.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .hamburger.is-open span:nth-child(2) { opacity: 0; }
 .hamburger.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* maintain red bg when open */
+.hamburger.is-open{background:var(--brand-red);}
 
 /* Off-canvas panel */
 .offcanvas {
@@ -95,4 +99,11 @@
   .hamburger,
   .offcanvas,
   .overlay { display: none !important; }
+} 
+
+.hamburger.is-open span:nth-child(1),
+.hamburger.is-open span:nth-child(2),
+.hamburger.is-open span:nth-child(3){
+  transform: none;
+  opacity: 1;
 } 
