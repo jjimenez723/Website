@@ -33,16 +33,15 @@ main {
   padding-bottom: clamp(4rem, 10vw, 8rem);
 }
 
-/* Vertical connector line */
-main::before {
-  content: "";
+/* Curvy storyline SVG */
+.storyline {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 3px;
+  width: 200px;
   height: 100%;
-  background: var(--accent);
+  pointer-events: none;
   z-index: 0;
 }
 
@@ -78,6 +77,9 @@ main::before {
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   position: relative;
   z-index: 1;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .chapter-media {
@@ -107,6 +109,7 @@ main::before {
   line-height: 1.6;
 }
 
+/* Visible state when intersecting */
 .visible {
   opacity: 1;
   transform: none;
