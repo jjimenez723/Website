@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KPI Builder | Rutgers Newark Bodega Project</title>
+  <!-- Google Font & Core Site Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- External Libraries -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@14.3.0/dist/handsontable.full.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/handsontable@14.3.0/dist/handsontable.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <style>
+    /* KPI Builder specific tweaks */
+    html,body{height:100%}
+    body{display:flex;flex-direction:column}
+    #hot{height:60vh;width:100%}
+    .offcanvas.draggable{transition:none!important}
+  </style>
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="sticky-header">
+    <nav>
+      <button class="hamburger" id="hamburger-menu" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="story.html">Story</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="./Map/map.html">Fast vs. Fresh Food Map</a></li>
+        <li><a href="kpi-builder.html" class="active">KPI Builder</a></li>
+        <li><a href="index.html#kpis">Data Visualization</a></li>
+        <li><a href="index.html#team">Team</a></li>
+      </ul>
+    </nav>
+    <div class="logo-bar">
+      <img src="images/7.png" alt="NJ STEM Ecosystem Logo" />
+      <img src="images/6.png" alt="USDA Logo" />
+      <img src="images/5.png" alt="Rutgers Logo" />
+      <img src="images/4.png" alt="BCC Logo" />
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>KPI Builder</h1>
+      <p>Interactively model supply-chain margins across roles—from farm to distributor to bodega.</p>
+    </div>
+  </section>
+
+  <!-- Gear button for column options -->
+  <button class="btn btn-secondary position-fixed top-0 end-0 m-2" id="gearBtn" aria-label="Column options">&#9881;</button>
+
+  <!-- Main container for KPI Builder -->
+  <div class="container-fluid mt-4 flex-grow-1 d-flex flex-column">
+    <!-- Role selector -->
+    <div id="roleSelector" class="mb-3">
+      <label class="fw-bold me-3">Role:</label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="role" id="roleFarm" value="Farm">
+        <label class="form-check-label" for="roleFarm">Farm</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="role" id="roleDistributor" value="Distributor">
+        <label class="form-check-label" for="roleDistributor">Distributor</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="role" id="roleBodega" value="Bodega">
+        <label class="form-check-label" for="roleBodega">Bodega</label>
+      </div>
+    </div>
+
+    <!-- Handsontable Grid -->
+    <div id="hot"></div>
+
+    <!-- Totals Card -->
+    <div class="card mt-3 d-none" id="totalsCard">
+      <div class="card-body">
+        <h5 class="card-title">Totals</h5>
+        <div id="totalsContent" class="card-text"></div>
+      </div>
+    </div>
+
+    <!-- Accordion -->
+    <div class="accordion mt-4" id="definitionsAccordion">
+      <!-- Column Definitions -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingCols">
+          <button class="accordion-button collapsed" type="button">Column Definitions</button>
+        </h2>
+        <div class="accordion-collapse collapse" id="collapseCols">
+          <div class="accordion-body">
+            <div class="table-responsive">
+              <table class="table table-sm align-middle">
+                <thead class="table-light">
+                  <tr><th>Column name</th><th>What it captures</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Produce</strong></td><td>The exact crop or item (acts as the unique key).</td></tr>
+                  <tr><td><strong>Category</strong></td><td>Broad food group (<em>Fruit, Vegetable, Herb, etc.</em>) so the dashboard can apply group-level assumptions.</td></tr>
+                  <tr><td><strong>Retail Price $/lb</strong></td><td>Shelf price shoppers pay per pound, taken from USDA-ERS national averages (editable).</td></tr>
+                  <tr><td><strong>Retail Margin %</strong></td><td>Retailer’s target gross-profit percentage on that item (default ≈ 37 %).</td></tr>
+                  <tr><td><strong>Retail Handling $/lb</strong></td><td>In-store labor, utilities, packaging, and other costs per pound (default $0.15 for fruit/veg, $0.50 for herbs).</td></tr>
+                  <tr><td><strong>Bodega Shrink %</strong></td><td>Percent of product lost inside the store to spoilage or theft; model subtracts this before profit calc (defaults ≈ 11–12 %).</td></tr>
+                  <tr><td><strong>Farm Markup %</strong></td><td>Grower’s desired markup added to production cost (default 15 %).</td></tr>
+                  <tr><td><strong>Farm Cost $/lb</strong></td><td>Estimated cost for the farm to grow, harvest, cool, and pack one retail-ready pound.</td></tr>
+                  <tr><td><strong>Farm Sale $/lb</strong></td><td>Actual price the farm receives: <code>Farm Cost × (1 + Farm Markup %)</code>.</td></tr>
+                  <tr><td><strong>Farm Shrink %</strong></td><td>Post-harvest loss before the load leaves the farm (default 2 %).</td></tr>
+                  <tr><td><strong>Dist. Handling $/lb</strong></td><td>Cooling, storage, trucking, and admin cost for the distributor (default $0.22 fruit, $0.20 veg, $1.00 herbs).</td></tr>
+                  <tr><td><strong>Dist. Margin %</strong></td><td>Distributor’s target gross-profit percentage (default 12 %).</td></tr>
+                  <tr><td><strong>Dist. Sale $/lb</strong></td><td>Price charged by the distributor: <code>(Farm Sale + Dist. Handling) × (1 + Dist. Margin %)</code>.</td></tr>
+                  <tr><td><strong>Dist. Shrink %</strong></td><td>Loss in the warehouse or during transit (default 4 %).</td></tr>
+                  <tr><td><strong>Qty lbs</strong></td><td>Planned volume in pounds you expect to move for this item (user editable; powers the totals).</td></tr>
+                  <tr><td><strong>Farm Gross Profit $/lb</strong></td><td>Extra cents the farm keeps on each pound after costs: <code>Farm Sale − Farm Cost</code> (read-only).</td></tr>
+                  <tr><td><strong>Farm Gross Margin %</strong></td><td>Farm gross profit expressed as a percent of Farm Sale price.</td></tr>
+                  <tr><td><strong>Dist. Gross Profit $/lb</strong></td><td>Distributor’s leftover cents per pound after paying the farm and its own handling cost.</td></tr>
+                  <tr><td><strong>Dist. Gross Margin %</strong></td><td>Distributor gross profit as a percent of Dist. Sale price.</td></tr>
+                  <tr><td><strong>Bodega Gross Profit $/lb</strong></td><td>Store’s leftover cents per pound after paying the distributor, subtracting shrink, and covering retail handling costs.</td></tr>
+                  <tr><td><strong>Bodega Gross Margin %</strong></td><td>That gross profit written as a percent of the shelf price.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- KPI Definitions -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingKPIs">
+          <button class="accordion-button collapsed" type="button">KPI Definitions</button>
+        </h2>
+        <div class="accordion-collapse collapse" id="collapseKPIs">
+          <div class="accordion-body">
+<div class="table-responsive">
+  <table class="table table-sm align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>KPI</th>
+        <th>Formula (column names)</th>
+        <th>Why it matters &amp; how to read</th>
+        <th>If the number looks <strong>too low</strong> …</th>
+        <th>If the number looks <strong>very high</strong> …</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Farm&nbsp;Gross&nbsp;Profit&nbsp;per&nbsp;Pound</strong></td>
+        <td><code>Farm Sale $/lb − Farm Cost $/lb</code></td>
+        <td>How many cents the farm retains on each pound after all growing, harvesting, cooling, and packing costs.</td>
+        <td>
+          Raise sale price to distributor; trim production costs (inputs, labor, packaging); improve yield to spread fixed costs.
+        </td>
+        <td>Consider reinvesting in quality upgrades or paying down debt—avoid over-pricing the market.</td>
+      </tr>
+      <tr>
+        <td><strong>Farm Gross Margin&nbsp;%</strong></td>
+        <td><code>(Farm GP $/lb ÷ Farm Sale $/lb) × 100</code></td>
+        <td>Percentage profit. Many produce farms aim for <strong>15–25&nbsp;%</strong>.</td>
+        <td>Same levers as above; also verify markup&nbsp;% is realistic.</td>
+        <td>If above 30&nbsp;% for a staple crop you may risk losing buyers.</td>
+      </tr>
+      <tr>
+        <td><strong>Distributor Gross Profit&nbsp;per&nbsp;Pound</strong></td>
+        <td><code>Dist. Sale $/lb − Farm Sale $/lb − Dist. Handling $/lb</code></td>
+        <td>Left-over cents for wholesaler after paying the farm and covering cooling, storage, trucking, and labor (goal&nbsp;8–15 ¢).</td>
+        <td>Negotiate lower farm price; raise distributor margin&nbsp;% ; cut fuel or warehouse costs.</td>
+        <td>Use cushion to offer volume discounts or invest in better cold-chain equipment.</td>
+      </tr>
+      <tr>
+        <td><strong>Distributor Gross Margin&nbsp;%</strong></td>
+        <td><code>(Dist. GP $/lb ÷ Dist. Sale $/lb) × 100</code></td>
+        <td>Efficiency score—most regional produce houses run <strong>10–15&nbsp;%</strong>.</td>
+        <td>Below 8&nbsp;%: route may be unprofitable—revisit prices or drop slow items.</td>
+        <td>Over 18&nbsp;% could trigger retailer push-back; consider strategic discounts.</td>
+      </tr>
+      <tr>
+        <td><strong>Bodega Gross Profit&nbsp;per&nbsp;Pound</strong></td>
+        <td><code>(Retail Price $/lb × (1 − Bodega Shrink % /100)) − Dist. Sale $/lb − Retail Handling $/lb</code></td>
+        <td>Store’s cents after paying distributor, factoring spoilage/theft, and in-store handling. Target <strong>35–45 ¢</strong>.</td>
+        <td>Raise shelf price; run promos to cut shrink; reduce handling costs.</td>
+        <td>Leverage surplus for specials to draw traffic or upgrade displays.</td>
+      </tr>
+      <tr>
+        <td><strong>Bodega Gross Margin&nbsp;%</strong></td>
+        <td><code>(Bodega GP $/lb ÷ Retail Price $/lb) × 100</code></td>
+        <td>Percent margin. Supermarkets average ~<strong>37&nbsp;%</strong>.</td>
+        <td>Below 25&nbsp;%: under-pricing or wasting too much.</td>
+        <td>Above 45&nbsp;%: check competitiveness; shoppers may trade down.</td>
+      </tr>
+      <tr>
+        <td><strong>Total Quantity&nbsp;(lbs)</strong></td>
+        <td>Σ Quantity lbs for visible rows</td>
+        <td>Planned volume for selected crops.</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Total Revenue&nbsp;($)</strong></td>
+        <td>If Farm → Σ(Farm Sale $/lb × Qty) <br>Distributor → Σ(Dist. Sale $/lb × Qty) <br>Bodega → Σ(Retail Price $/lb × (1 − Shrink&nbsp;%) × Qty)</td>
+        <td>Top-line sales dollars for chosen role, adjusted for shrink when viewing as Bodega.</td>
+        <td>Increase quantity, price, or both; trim shrink (retail role).</td>
+        <td>Check capacity (acreage, truck or shelf space) to handle volume.</td>
+      </tr>
+      <tr>
+        <td><strong>Total Gross Profit&nbsp;($)</strong></td>
+        <td>Role-specific GP per pound × Qty, summed for visible rows</td>
+        <td>Absolute earnings for the batch.</td>
+        <td>Adjust per-pound GP levers starting with highest-volume items.</td>
+        <td>Reinvest; ensure long-term demand isn’t hurt.</td>
+      </tr>
+      <tr>
+        <td><strong>Average Gross Margin&nbsp;%</strong></td>
+        <td>(Total Gross Profit ÷ Total Revenue) × 100</td>
+        <td>Weighted margin across everything selected—big-picture health.</td>
+        <td>Below benchmark: focus on low-margin items or renegotiate large contracts.</td>
+        <td>Above benchmark: great—monitor competitor prices to stay sustainable.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- Citations -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingCite">
+          <button class="accordion-button collapsed" type="button">Citations</button>
+        </h2>
+        <div class="accordion-collapse collapse" id="collapseCite">
+          <div class="accordion-body">
+            <div class="table-responsive">
+              <table class="table table-sm align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Source description</th>
+                    <th scope="col">Verified link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td><strong>USDA ERS – Fruit &amp; Vegetable Prices</strong> (interactive tables with national average retail prices per pound)</td>
+                    <td><a href="https://www.ers.usda.gov/data-products/fruit-and-vegetable-prices" target="_blank" rel="noopener">View</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td><strong>USDA ERS – Price Spreads from Farm to Consumer</strong> (farm-share percentages for fresh fruits and vegetables)</td>
+                    <td><a href="https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer" target="_blank" rel="noopener">View</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td><strong>USDA ERS – Food Dollar Series, 2023 Chart of Note</strong> (wholesale-trade share = 11.4 ¢ of the food dollar)</td>
+                    <td><a href="https://www.ers.usda.gov/data-products/charts-of-note/chart-detail?chartId=110567" target="_blank" rel="noopener">View</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td><strong>USDA ERS – Chart of Note: Supermarket shrink varies by type of fresh fruit and vegetable</strong> (shrink averages = 12.6 % fruit / 11.6 % veg)</td>
+                    <td><a href="https://www.ers.usda.gov/data-products/charts-of-note/chart-detail?chartId=79033" target="_blank" rel="noopener">View</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td><strong>USDA ERS – Updated Supermarket Shrink Estimates for Fresh Foods</strong> (full methodology PDF, EIB-155)</td>
+                    <td><a href="https://www.ers.usda.gov/sites/default/files/_laserfiche/publications/44100/EIB-155.pdf" target="_blank" rel="noopener">PDF</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td><strong>International Fresh Produce Association – Supermarket Produce Department Benchmarks (2024)</strong> (reports 37 % average produce gross margin)</td>
+                    <td><a href="https://www.freshproduce.com/resources/retail/supermarket-produce-department-benchmarks/" target="_blank" rel="noopener">View</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Off-canvas (Column Options) -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="columnOptions">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Column Options</h5>
+      <button type="button" class="btn-close" id="closeCanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <h6 class="mb-2">Column Visibility</h6>
+      <div id="columnToggles" class="mb-3"></div>
+      <hr/>
+      <h6 class="mb-2">Crop Filter</h6>
+      <div id="cropToggles" style="max-height:200px;overflow:auto;"></div>
+    </div>
+  </div>
+
+  <!-- KPI Builder Script -->
+  <script>
+  // Constants
+  const roleCols = {
+    Farm: ['Produce','Category','Farm Cost $/lb','Farm Markup %','Farm Sale $/lb',
+           'Farm Shrink %','Farm GP $/lb','Farm GM %','Qty lbs'],
+    Distributor:['Produce','Category','Farm Sale $/lb','Dist. Handling $/lb','Dist. Margin %',
+                 'Dist. Sale $/lb','Dist. Shrink %','Dist. GP $/lb','Dist. GM %','Qty lbs'],
+    Bodega: ['Produce','Category','Dist. Sale $/lb','Retail Handling $/lb','Retail Margin %',
+             'Retail Price $/lb','Bodega Shrink %','Bodega GP $/lb','Bodega GM %','Qty lbs']
+  };
+  const kpiDefs = [
+    'Farm GP $/lb','Farm GM %',
+    'Dist. GP $/lb','Dist. GM %',
+    'Bodega GP $/lb','Bodega GM %'
+  ];
+  // Globals
+  let hot, hotData = [], colHeaders = [];
+  let currentRole = null; // 'Farm' | 'Distributor' | 'Bodega'
+  const userVisible = new Set();   // columns user forced visible
+  const userHidden  = new Set();   // columns user forced hidden
+  let selectedCrops = new Set();   // produce items to include
+
+  // Utility
+  const round = (v,d=2)=> (isFinite(v)? +(+v).toFixed(d): 0);
+
+  // Recalculate a single row according to provided formulas
+  function recalcRow(rIdx){
+    const d = hot.getSourceDataAtRow(rIdx);
+    // ensure numbers
+    Object.keys(d).forEach(k=>{ if(d[k]==='') d[k]=0; d[k]=Number(d[k]) || d[k]; });
+
+    d['Farm Sale $/lb']    = d['Farm Cost $/lb'] * (1 + d['Farm Markup %']/100);
+    d['Dist. Sale $/lb']   = (d['Farm Sale $/lb'] + d['Dist. Handling $/lb']) * (1 + d['Dist. Margin %']/100);
+    d['Retail Price $/lb'] = (d['Dist. Sale $/lb'] + d['Retail Handling $/lb']) * (1 + d['Retail Margin %']/100);
+
+    d['Farm GP $/lb']      = d['Farm Sale $/lb'] - d['Farm Cost $/lb'];
+    d['Farm GM %']         = d['Farm Sale $/lb'] ? 100*d['Farm GP $/lb']/d['Farm Sale $/lb'] : 0;
+    d['Dist. GP $/lb']     = d['Dist. Sale $/lb'] - d['Farm Sale $/lb'] - d['Dist. Handling $/lb'];
+    d['Dist. GM %']        = d['Dist. Sale $/lb'] ? 100*d['Dist. GP $/lb']/d['Dist. Sale $/lb'] : 0;
+    d['Bodega GP $/lb']    = (d['Retail Price $/lb']*(1 - d['Bodega Shrink %']/100)) - d['Dist. Sale $/lb'] - d['Retail Handling $/lb'];
+    d['Bodega GM %']       = d['Retail Price $/lb'] ? 100*d['Bodega GP $/lb']/d['Retail Price $/lb'] : 0;
+  }
+
+  // Stand-alone compute function (does not depend on Handsontable instance)
+  function computeRowObj(d){
+    // ensure numbers
+    Object.keys(d).forEach(k=>{ if(d[k]==='') d[k]=0; d[k]=Number(d[k]) || d[k]; });
+
+    d['Farm Sale $/lb']    = d['Farm Cost $/lb'] * (1 + d['Farm Markup %']/100);
+    d['Dist. Sale $/lb']   = (d['Farm Sale $/lb'] + d['Dist. Handling $/lb']) * (1 + d['Dist. Margin %']/100);
+    d['Retail Price $/lb'] = (d['Dist. Sale $/lb'] + d['Retail Handling $/lb']) * (1 + d['Retail Margin %']/100);
+
+    d['Farm GP $/lb']      = d['Farm Sale $/lb'] - d['Farm Cost $/lb'];
+    d['Farm GM %']         = d['Farm Sale $/lb'] ? 100*d['Farm GP $/lb']/d['Farm Sale $/lb'] : 0;
+    d['Dist. GP $/lb']     = d['Dist. Sale $/lb'] - d['Farm Sale $/lb'] - d['Dist. Handling $/lb'];
+    d['Dist. GM %']        = d['Dist. Sale $/lb'] ? 100*d['Dist. GP $/lb']/d['Dist. Sale $/lb'] : 0;
+    d['Bodega GP $/lb']    = (d['Retail Price $/lb']*(1 - d['Bodega Shrink %']/100)) - d['Dist. Sale $/lb'] - d['Retail Handling $/lb'];
+    d['Bodega GM %']       = d['Retail Price $/lb'] ? 100*d['Bodega GP $/lb']/d['Retail Price $/lb'] : 0;
+  }
+
+  function recalcTotals(role){
+    const data = hot.getSourceData();
+    let rev=0, gp=0, qty=0;
+    data.forEach(d=>{
+      if(!selectedCrops.has(d['Produce'])) return; // respect crop filter
+      const q = Number(d['Qty lbs']) || 0; if(!q) return;
+      qty += q;
+      const num = v=>Number(v)||0;
+      if(role==='Farm'){
+        rev += num(d['Farm Sale $/lb'])*q;
+        gp  += num(d['Farm GP $/lb'])*q;
+      } else if(role==='Distributor'){
+        rev += num(d['Dist. Sale $/lb'])*q;
+        gp  += num(d['Dist. GP $/lb'])*q;
+      } else if(role==='Bodega'){
+        rev += num(d['Retail Price $/lb'])*(1-num(d['Bodega Shrink %'])/100)*q;
+        gp  += num(d['Bodega GP $/lb'])*q;
+      }
+    });
+    const gm = rev ? (100*gp/rev) : 0;
+    const html = `<ul class="list-unstyled mb-0">
+       <li><strong>Total Qty (lbs):</strong> ${round(qty,0)}</li>
+       <li><strong>Total Revenue ($):</strong> ${round(rev,2)}</li>
+       <li><strong>Total GP ($):</strong> ${round(gp,2)}</li>
+       <li><strong>Gross Margin %:</strong> ${round(gm,1)}</li>
+     </ul>`;
+    document.getElementById('totalsContent').innerHTML = html;
+  }
+
+  function applyVisibility(){
+    const hiddenIdx=[];
+    colHeaders.forEach((h,i)=>{
+      if(h==='Produce' || h==='Category'){ return; } // always visible
+      let visible=false;
+      if(userVisible.has(h)) visible = true;
+      else if(userHidden.has(h)) visible = false;
+      else if(currentRole && roleCols[currentRole].includes(h)) visible = true;
+      else visible = false;
+      if(!visible) hiddenIdx.push(i);
+    });
+    const plugin = hot.getPlugin('hiddenColumns');
+    // show all first then hide desired to ensure reset
+    plugin.showColumns(colHeaders.map((_,i)=>i));
+    if(hiddenIdx.length) plugin.hideColumns(hiddenIdx);
+    hot.render();
+  }
+
+  function setRole(role){
+    currentRole = role;
+    document.getElementById('totalsCard').classList.remove('d-none');
+    applyVisibility();
+    recalcTotals(role);
+  }
+  function buildColumnDefs(){
+    return colHeaders.map(h=>{
+      const readOnly = h==='Produce'||h==='Category'||kpiDefs.includes(h);
+      const isPercent=h.includes('%');
+      const isNumeric=h.includes('$')||isPercent||h==='Qty lbs'||kpiDefs.includes(h);
+      return {
+        data:h,
+        readOnly,
+        type:isNumeric?'numeric':'text',
+        numericFormat:isNumeric?{pattern:isPercent?'0.0':'0.00'}:undefined
+      };
+    });
+  }
+  function buildColumnToggles(){
+    const container=document.getElementById('columnToggles');
+    container.innerHTML='';
+    colHeaders.forEach((h,i)=>{
+      const id='chk_'+i;
+      container.insertAdjacentHTML('beforeend',
+      `<div class="form-check"><input class="form-check-input" type="checkbox" ${h==='Produce'||h==='Category'?'checked disabled':''} checked id="${id}"> <label class="form-check-label" for="${id}">${h}</label></div>`);
+      container.lastElementChild.querySelector('input').addEventListener('change',e=>{
+        if(e.target.disabled) return;
+        if(e.target.checked) { userVisible.add(h); userHidden.delete(h); } else { userHidden.add(h); userVisible.delete(h); }
+        applyVisibility();
+      });
+    });
+  }
+  // Draggable offcanvas
+  function enableDrag(el,handle){let sx,sy,ox,oy,drag=false;
+    handle.addEventListener('mousedown',e=>{drag=true;el.classList.add('draggable');sx=e.clientX;sy=e.clientY;const r=el.getBoundingClientRect();ox=r.left;oy=r.top;document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);});
+    function mv(e){if(!drag)return;el.style.transform='none';el.style.left=(ox+e.clientX-sx)+'px';el.style.top=(oy+e.clientY-sy)+'px';}
+    function up(){drag=false;el.classList.remove('draggable');document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);} }
+
+  // Accordion toggle (simple)
+  document.addEventListener('click',e=>{if(e.target.classList.contains('accordion-button')){const b=e.target,c=b.parentElement.nextElementSibling;b.classList.toggle('collapsed');c.classList.toggle('show');}});
+
+  // Offcanvas show/hide
+  const offcanvas=document.getElementById('columnOptions');
+  document.getElementById('gearBtn').onclick=()=>offcanvas.classList.add('show');
+  document.getElementById('closeCanvas').onclick=()=>offcanvas.classList.remove('show');
+  enableDrag(offcanvas, offcanvas.querySelector('.offcanvas-header'));
+
+  // Load CSV & init Handsontable
+  Papa.parse('Supply_Chain_KPI_Builder.csv',{
+    download:true,header:true,dynamicTyping:true,complete:(res)=>{
+      hotData=res.data.filter(r=>r.Produce);
+      hotData.forEach(computeRowObj); // compute before Handsontable exists
+      colHeaders=Object.keys(hotData[0]);
+      const container=document.getElementById('hot');
+      hot=new Handsontable(container,{
+        data:hotData,
+        colHeaders,
+        columns:buildColumnDefs(),
+        licenseKey:'non-commercial-and-evaluation',
+        stretchH:'all',
+        height:'100%',
+        hiddenColumns:{columns:[],indicators:true},
+        hiddenRows:{rows:[],indicators:true},
+        afterChange:(changes,src)=>{
+          if(src==='loadData'||!changes)return;
+          new Set(changes.map(c=>c[0])).forEach(r=>recalcRow(r));
+          hot.render();
+          const roleSel=document.querySelector('input[name="role"]:checked');
+          if(roleSel) recalcTotals(roleSel.value);
+        }
+      });
+      // initialize crop set then UI
+      hotData.forEach(r=>selectedCrops.add(r['Produce']));
+      buildCropToggles();
+      buildColumnToggles();
+      applyRowFilter();
+    }
+  });
+  // Role selector listeners
+  document.querySelectorAll('input[name="role"]').forEach(inp=>inp.addEventListener('change',e=>setRole(e.target.value)));
+
+  function applyRowFilter(){
+    const hidden=[];
+    hotData.forEach((row,idx)=>{
+      if(!selectedCrops.has(row['Produce'])) hidden.push(idx);
+    });
+    const plugin=hot.getPlugin('hiddenRows');
+    plugin.showRows([...Array(hotData.length).keys()]);
+    if(hidden.length) plugin.hideRows(hidden);
+  }
+
+  function buildCropToggles(){
+    const container=document.getElementById('cropToggles');
+    container.innerHTML='';
+    const crops=[...selectedCrops].sort();
+    crops.forEach(c=>{
+      const id='crop_'+c.replace(/[^a-z0-9]/gi,'_');
+      container.insertAdjacentHTML('beforeend',
+        `<div class="form-check"><input class="form-check-input" type="checkbox" checked id="${id}"> <label class="form-check-label" for="${id}">${c}</label></div>`);
+      container.lastElementChild.querySelector('input').addEventListener('change',e=>{
+        if(e.target.checked) selectedCrops.add(c); else selectedCrops.delete(c);
+        applyRowFilter();
+        const roleSel=document.querySelector('input[name="role"]:checked');
+        if(roleSel) recalcTotals(roleSel.value);
+      });
+    });
+  }
+  </script>
+
+  <!-- Site-wide JS (hamburger & misc) -->
+  <script src="script.js"></script>
+</body>
+</html> 
