@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fresh-Produce Heatmap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Leaflet CSS (force 1.5.1) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+  <!-- MarkerCluster CSS (optional) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+  <!-- Font Awesome for custom icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Your custom styles -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="map-page">
+  <header class="sticky-header">
+    <nav>
+      <ul class="menu">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li><a href="map.html">Fast vs. Fresh Food Map</a></li>
+        <li><a href="../index.html#kpis">Data Visualization</a></li>
+        <li><a href="../index.html#team">Team</a></li>
+      </ul>
+    </nav>
+    <div class="logo-bar">
+      <img src="../images/7.png" alt="NJ STEM Ecosystem Logo" />
+      <img src="../images/6.png" alt="USDA Logo" />
+      <img src="../images/5.png" alt="Rutgers Logo" />
+      <img src="../images/4.png" alt="BCC Logo" />
+    </div>
+  </header>
+  <div id="main-flex-container">
+    <aside id="control-panel">
+      <button id="restorePanelBtn" title="Restore panel" aria-label="Restore panel" style="display:none;position:absolute;top:0.7em;left:0.7em;font-size:1.5em;z-index:10;background:none;border:none;cursor:pointer;">»</button>
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <h2 class="panel-title" tabindex="0">Map Controls</h2>
+        <div style="display: flex; gap: 0.5em; align-items: center;">
+          <button id="compactPanelBtn" title="Shrink/Expand panel" aria-label="Shrink/Expand panel" style="background:none;border:none;font-size:1.3em;cursor:pointer;padding:0.2em 0.5em;">
+            <i class="fas fa-compress-alt"></i>
+          </button>
+          <button id="minimizePanelBtn" title="Minimize panel" aria-label="Minimize panel" style="background:none;border:none;font-size:2em;cursor:pointer;padding:0.2em 0.5em;line-height:1;">
+            <b>&mdash;</b>
+          </button>
+        </div>
+      </div>
+      <div id="exportSpinner" role="status" aria-live="polite" aria-label="Exporting, please wait"></div>
+      <div class="panel-section">
+        <h3 class="panel-section-title">Layers</h3>
+        <div class="controls" aria-label="Layer toggles">
+          <label class="toggle-label">
+            <input type="checkbox" id="produceToggle" checked>
+            <span class="long-label">Fresh Food</span>
+            <span class="short-label">Fresh</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="fastfoodToggle" checked>
+            <span class="long-label">Fast Food</span>
+            <span class="short-label">Fast</span>
+          </label>
+        </div>
+        <div class="controls" aria-label="Heatmap controls">
+          <div class="slider-compact-row">
+            <label class="slider-label">
+              <span class="long-label">Intensity:</span>
+              <span class="short-label">Int.</span>
+              <input type="range" id="intensitySlider" min="0.1" max="1" step="0.05" value="1">
+            </label>
+            <label class="slider-label">
+              <span class="long-label">Size:</span>
+              <span class="short-label">Sz.</span>
+              <input type="range" id="sizeSlider" min="5" max="60" step="1" value="40">
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr class="panel-divider" />
+      <div class="panel-section">
+        <h3 class="panel-section-title">Filter & Center</h3>
+        <button id="centerFilterBtn">Center / Filter</button>
+        <div class="center-controls" aria-label="Filter controls">
+          <div class="row">
+            <label>Address: <input type="text" id="addressInput" placeholder="Enter address" style="width:100%" /></label>
+            <label>Radius (km): <input type="number" id="radiusInput" min="0" step="any" value="1" style="width:100%" /></label>
+          </div>
+          <div class="row">
+            <label>Lat: <input type="number" id="latInput" step="any" placeholder="Latitude" style="width:100%" /></label>
+            <label>Lng: <input type="number" id="lngInput" step="any" placeholder="Longitude" style="width:100%" /></label>
+          </div>
+        </div>
+      </div>
+      <hr class="panel-divider" />
+      <div class="panel-section">
+        <h3 class="panel-section-title">Export & Share</h3>
+        <div class="export-controls" aria-label="Export and share controls">
+          <button id="exportImgBtn">Export as Image</button>
+          <button id="shareLinkBtn">
+            <span class="long-label">Share Map Link</span>
+          </button>
+          <button id="printBtn">
+            <span class="long-label">Print</span>
+          </button>
+        </div>
+        <div class="legend-export-controls">
+          <label for="legendPosition"><strong>Legend Position for Export:</strong></label>
+          <select id="legendPosition" aria-label="Legend position for export" style="width:100%">
+            <option value="top-right">Top Right</option>
+            <option value="top-left">Top Left</option>
+            <option value="bottom-right">Bottom Right</option>
+            <option value="bottom-left" selected>Bottom Left</option>
+          </select>
+        </div>
+      </div>
+      <hr class="panel-divider" />
+      <div class="panel-section">
+        <h3 class="panel-section-title">Map Display</h3>
+        <div class="layer-controls" aria-label="Map display controls">
+          <button id="layerModeBtn">Switch to Cluster View</button>
+          <button id="borderToggleBtn">Hide Newark Border</button>
+        </div>
+      </div>
+    </aside>
+    <button id="showPanelBtn" title="Show panel" aria-label="Show panel" style="display:none;position:fixed;left:0;top:50%;transform:translateY(-50%);font-size:2.2em;z-index:3001;background:#015941;color:#fff;border:none;border-radius:0 1.2em 1.2em 0;padding:0.2em 0.5em;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;">→</button>
+    <main id="map-area">
+      <div id="map"></div>
+    </main>
+  </div>
+  <!-- Leaflet JS (force 1.5.1) -->
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  <!-- leaflet-image for export as image (must come right after Leaflet) -->
+  <script src="https://unpkg.com/leaflet-image/leaflet-image.js"></script>
+  <!-- Heat plugin -->
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+  <!-- MarkerCluster plugin -->
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  <!-- leaflet-pip for point-in-polygon -->
+  <script src="https://unpkg.com/leaflet-pip/leaflet-pip.min.js"></script>
+  <!-- html2canvas for export as image (for legend) -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" crossorigin="anonymous"></script>
+  <!-- Your map logic -->
+  <script src="../script.js"></script>
+</body>
+</html>

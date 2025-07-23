@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+  <style>#map { height: 400px; width: 600px; }</style>
+</head>
+<body>
+  <div id="map"></div>
+  <button onclick="exportMap()">Export Map</button>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-image/leaflet-image.js"></script>
+  <script>
+    var map = L.map('map').setView([40.7, -74.0], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    function exportMap() {
+      leafletImage(map, function(canvas) {
+        if (!canvas) {
+          alert('leaflet-image did not return a map canvas.');
+          return;
+        }
+        document.body.appendChild(canvas);
+      });
+    }
+  </script>
+</body>
+</html>

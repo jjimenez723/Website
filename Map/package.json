@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "bottleneck": "^2.19.5",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "express": "^5.1.0",
+    "node-fetch": "^2.7.0"
+  }
+}

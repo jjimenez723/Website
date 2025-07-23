@@ -1,0 +1,395 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Eddy's supermarket On Clinton",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2135991,
+          40.723341
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Food Plaza Supermarket\u00a0",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1735106,
+          40.75618589999999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Jr Freeway Deli Market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.21009049999999,
+          40.71294410000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Hawthorne Grocery",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2076835,
+          40.7173743
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Global Mini Market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.163294,
+          40.7796756
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "7th Ave. Grocery",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1926689,
+          40.7557406
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bloomfield Deli",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1765008,
+          40.7602041
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "JM grocery store & Deli",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.19809,
+          40.7519384
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "JNC Mini Market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2112087,
+          40.73353349999999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Casey's Grocery",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2025407,
+          40.7355629
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "F&D Supermarket",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.17432509999999,
+          40.75120630000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "La Bodeguita Deli Grocery",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1741136,
+          40.7551615
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "De Sanchez Grocery Llc",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.19913729999999,
+          40.7347416
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "D & A Deli Grocery",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2104478,
+          40.7355141
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "El piloto deli & grocery",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1811757,
+          40.7485073
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "New Stop 4 Food Market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2068654,
+          40.7098998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Shop Smart Food Market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1822777,
+          40.7290155
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Medina Meat Market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.20750389999999,
+          40.7271845
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Washington food market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.17920749999999,
+          40.7296026
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Park Avenue Deli and Food Market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1781371,
+          40.7566432
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rutgers University",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.17418909999999,
+          40.7416983
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Link Community Charter School",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1800639,
+          40.7246212
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rodriguez Family Market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1926872,
+          40.7387679
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "We the best Food Market",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1963839,
+          40.7391862
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "R&R Grocery",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.20495489999999,
+          40.73977000000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "New Mega Supermarket",
+        "address": NaN,
+        "type": "produce"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.20351029999999,
+          40.7314356
+        ]
+      }
+    }
+  ]
+}

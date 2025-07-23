@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Gallery | Rutgers Newark Bodega Project</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+<body>
+  <header class="sticky-header">
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="./Map/map.html">Fast vs. Fresh Food Map</a></li>
+        <li><a href="#kpis">Data Visualization</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+    </nav>
+    <div class="logo-bar">
+      <img src="images/7.png" alt="NJ STEM Ecosystem Logo" />
+      <img src="images/6.png" alt="USDA Logo" />
+      <img src="images/5.png" alt="Rutgers Logo" />
+      <img src="images/4.png" alt="BCC Logo" />
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Project Gallery</h1>
+      <p>Step inside the story of the Rutgers Newark Bodega Project. This gallery captures the vibrant moments, hard work, and community spirit that drive our mission. From bustling bodegas to flourishing gardens, every image is a testament to collaboration, resilience, and hope. Explore the journey, celebrate the people, and witness the transformation—one photo at a time.</p>
+    </div>
+  </section>
+
+  <section class="gallery-section content-section">
+    <h2>Photo Highlights</h2>
+    <div class="gallery-grid">
+      <img src="images/IMG_2368.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2378.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2063.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2064.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2371.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2369.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2377.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2065.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2376.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2380.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2367.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2062.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2060.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2373.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2066.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2375.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2374.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2370.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2379.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2372.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2366.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2068.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/IMG_2067.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/2070.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+      <img src="images/2061.JPG" alt="Project photo" class="gallery-thumb" loading="lazy">
+    </div>
+    <div id="lightbox-overlay" class="lightbox-overlay" style="display:none;">
+      <span class="lightbox-close">&times;</span>
+      <img class="lightbox-img" src="" alt="Large project photo">
+      <span class="lightbox-prev">&#10094;</span>
+      <span class="lightbox-next">&#10095;</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>Contact: <a href="mailto:esanchez@bergen.edu">esanchez@bergen.edu</a></p>
+    <p>&copy; 2025 Rutgers–Bergen Bodega Project</p>
+  </footer>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+    // Animate hero text
+    document.querySelector('.hero-text h1').style.opacity = 0;
+    document.querySelector('.hero-text p').style.opacity = 0;
+    setTimeout(() => {
+      document.querySelector('.hero-text h1').style.transition = 'opacity 1s cubic-bezier(0.4,0.2,0.2,1), transform 1s cubic-bezier(0.4,0.2,0.2,1)';
+      document.querySelector('.hero-text h1').style.opacity = 1;
+      document.querySelector('.hero-text h1').style.transform = 'translateY(0)';
+    }, 200);
+    setTimeout(() => {
+      document.querySelector('.hero-text p').style.transition = 'opacity 1s cubic-bezier(0.4,0.2,0.2,1), transform 1s cubic-bezier(0.4,0.2,0.2,1)';
+      document.querySelector('.hero-text p').style.opacity = 1;
+      document.querySelector('.hero-text p').style.transform = 'translateY(0)';
+    }, 500);
+
+    // Animate gallery section
+    ScrollReveal().reveal('.gallery-section h2', {
+      distance: '30px',
+      duration: 900,
+      easing: 'ease-out',
+      origin: 'top',
+      delay: 200
+    });
+    ScrollReveal().reveal('.gallery-thumb', {
+      distance: '20px',
+      duration: 700,
+      easing: 'ease-out',
+      origin: 'bottom',
+      interval: 80
+    });
+  </script>
+  <script>
+    // Lightbox functionality for gallery
+    const galleryThumbs = document.querySelectorAll('.gallery-thumb');
+    const lightbox = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+    let currentIndex = 0;
+    const images = Array.from(galleryThumbs).map(img => img.src);
+
+    function showLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = images[index];
+      lightbox.style.display = 'flex';
+    }
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    }
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex];
+    }
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex];
+    }
+    galleryThumbs.forEach((img, i) => {
+      img.addEventListener('click', () => showLightbox(i));
+    });
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', showPrev);
+    nextBtn.addEventListener('click', showNext);
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (lightbox.style.display === 'flex') {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+      }
+    });
+  </script>
+</body>
+</html> 
